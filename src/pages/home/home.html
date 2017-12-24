@@ -3,16 +3,33 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Bicli </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col col-12 offset-md-3 col-md-6>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+        <ion-card (click)="goto('mtb')">
+          <img src="assets/imgs/mtb.jpg" />
+          <div class="card-title">Mountaun Bike</div>
+          <div class="card-subtitle"></div>
+        </ion-card>
+        <ion-card>
+          <img src="assets/imgs/road.jpg" />
+          <div class="card-title">Carretera</div>
+          <div class="card-subtitle"></div>
+        </ion-card>
+        <ion-card>
+          <img src="assets/imgs/rutas.jpg" />
+          <div class="card-title">Todas las rutas</div>
+          <div class="card-subtitle"></div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+
 </ion-content>
