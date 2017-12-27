@@ -1,0 +1,107 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+
+
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col col-12 offset-md-3 col-md-6>
+        <div padding>
+          <ion-segment [(ngModel)]="tipoLogin">
+            <ion-segment-button value="profile">
+              Login
+            </ion-segment-button>
+            <ion-segment-button value="newProfile">
+              Nuevo usuario
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <div [ngSwitch]="tipoLogin">
+          <ion-card *ngSwitchCase="'profile'">
+            <img src="assets/imgs/inicio.jpg" />
+            <ion-card-content>
+              <ion-card-title>
+                Inicie sesion con su cuenta de usuario
+              </ion-card-title>
+              <ion-list>
+                <form>
+                  <ion-item>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input [(ngModel)]="profile.email" name="email" type="text" autocapitalize="off" required>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label floating>Contraseña</ion-label>
+                    <ion-input [(ngModel)]="profile.password" name="password" type="password" required>
+                    </ion-input>
+                  </ion-item>
+                  <div padding>
+                    <button ion-button [disabled]="loginPending" (click)="login()" type="submit" color="primary" block>
+                    Login
+                  </button>
+                  </div>
+                </form>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+
+          <ion-card *ngSwitchCase="'newProfile'">
+            <ion-card-content>
+              <div padding>
+
+                <p>
+                  Si no dispone de usuario puede darlo de alta
+                </p>
+                <ion-list>
+                  <form>
+                    <ion-item>
+                      <ion-label floating>Nombre</ion-label>
+                      <ion-input [(ngModel)]="profile.name" name="name" type="text" autocapitalize="off" required>
+                      </ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label floating>Poblacion</ion-label>
+                      <ion-input [(ngModel)]="profile.town" name="town" type="text" autocapitalize="off" required>
+                      </ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label floating>Teléfono</ion-label>
+                      <ion-input [(ngModel)]="profile.phone" name="phone" type="text" autocapitalize="off" required>
+                      </ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label floating>Email</ion-label>
+                      <ion-input [(ngModel)]="profile.email" name="email" type="text" autocapitalize="off" required>
+                      </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                      <ion-label floating>Contraseña</ion-label>
+                      <ion-input [(ngModel)]="profile.password" name="password" type="password" required>
+                      </ion-input>
+                    </ion-item>
+                  </form>
+                </ion-list>
+                <button ion-button [disabled]="loginPending" (click)="signin()" type="submit" color="secondary" block>
+                      Dar de alta
+                  </button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
