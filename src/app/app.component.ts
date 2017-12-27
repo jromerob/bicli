@@ -4,10 +4,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AuthProvider } from './providers/auth.provider';
+import { ProfileProvider } from './providers/profile.provider';
 
 import { HomePage } from '../pages/home/home';
 import { RoutesPage } from '../pages/routes/routes';
 import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,13 +21,14 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider: AuthProvider) {
+  constructor(private profileProvider: ProfileProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider: AuthProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Inicio', component: HomePage },
-      { title: 'Rutas', component: RoutesPage }
+      { title: 'Rutas', component: RoutesPage },
+      { title: 'Mi perfil', component: ProfilePage }
     ];
 
   }
@@ -33,15 +36,16 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       this.authProvider.Session.subscribe(
-
         (session) => {
           console.log("Cambio en la sesion")
           if (session) {
             console.log("Usuario logado nos dirigimos a inicio")
+            this.profileProvider.set(session.uid);
             this.rootPage = HomePage;
           }
           else {
             console.log("Usuario no logado")
+            this.profileProvider.unSet();
             this.rootPage = LoginPage;
           }
         }
