@@ -2,28 +2,27 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the RoutesPage page.
+ * Generated class for the ClubsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @IonicPage({
-  name: 'routes',
-  segment: 'routes'
-}
-)
-@Component({
-  selector: 'page-routes',
-  templateUrl: 'routes.html',
+  name: 'clubs',
+  segment: 'clubs'
 })
-export class RoutesPage {
+@Component({
+  selector: 'page-clubs',
+  templateUrl: 'clubs.html',
+})
+export class ClubsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RoutesPage');
+    console.log('ionViewDidLoad ClubsPage');
   }
 
 }

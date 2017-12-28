@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { RoutesPage } from '../pages/routes/routes';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
+import { ClubsPage } from '../pages/clubs/clubs';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,16 +20,17 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: any, path: string }>;
 
   constructor(private profileProvider: ProfileProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider: AuthProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inicio', component: HomePage },
-      { title: 'Rutas', component: RoutesPage },
-      { title: 'Mi perfil', component: ProfilePage }
+    //  { title: 'Inicio', component: HomePage, path: 'home' },
+      { title: 'Rutas', component: RoutesPage, path: 'routes' },
+      { title: 'Clubs/Grupos', component: ClubsPage, path: 'clubs' },
+      { title: 'Mi perfil', component: ProfilePage, path: 'profile' }
     ];
 
   }
@@ -60,7 +62,8 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //this.nav.setRoot(page.component);
+    this.nav.push(page.path);
   }
 
   logout() {

@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { App } from 'ionic-angular';
+import { App, IonicPage } from 'ionic-angular';
 import { RoutesPage } from '../routes/routes';
 
+@IonicPage({
+  name: 'home'
+})
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
