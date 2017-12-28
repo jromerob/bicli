@@ -5,8 +5,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-
+import { ComponentsModule } from './components/components.module';
 
 import { MyApp } from './app.component';
 
@@ -22,6 +21,7 @@ import { ProfileProvider } from './providers/profile.provider';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RoutesProvider } from './providers/routes.provider';
+import { ClubsProvider } from './providers/clubs.provider';
 
 
 export const firebaseConfig = {
@@ -35,7 +35,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,ClubsPage,
+    MyApp, ClubsPage,
     ProfilePage,
     HomePage,
     LoginPage,
@@ -48,6 +48,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,8 +66,7 @@ export const firebaseConfig = {
     ProfileProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RoutesProvider,
-
-
+    ClubsProvider,
   ]
 })
 export class AppModule { }

@@ -1,4 +1,9 @@
-<!-- Generated template for the ClubsListComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-list>
+  <button ion-item *ngFor="let club of userClubs | async" detail-push (ionChange)="gotoDetail(club)">
+    <ion-icon item-start name="bicycle"></ion-icon>
+    <ion-label>
+      {{club.name}} - {{club.town}}
+    </ion-label>
+    <ion-toggle (ionChange)="suscribeToClub(club)"></ion-toggle>
+  </button>
+</ion-list>

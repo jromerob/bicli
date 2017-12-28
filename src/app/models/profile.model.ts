@@ -6,6 +6,7 @@ export class ProfileModel {
   name: string = "";
   phone: string = "";
   town: string = "";
+  clubs: string[] = [];
 
 
 

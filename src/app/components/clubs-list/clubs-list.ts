@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ClubsProvider } from '../../providers/clubs.provider';
+import { ClubModel } from '../../models/club.model';
+import { NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the ClubsListComponent component.
@@ -12,11 +15,18 @@ import { Component } from '@angular/core';
 })
 export class ClubsListComponent {
 
-  text: string;
+  userClubs: any;
 
-  constructor() {
+  constructor(private clubsProvider: ClubsProvider) {
     console.log('Hello ClubsListComponent Component');
-    this.text = 'Hello World';
+    this.userClubs = this.clubsProvider.getUserClubs();
   }
 
+  suscribeToClub(club: ClubModel) {
+    alert("suscrito a " + club.name)
+  }
+
+  gotoDetail(club: ClubModel) {
+    alert("ir a " + club.name)
+  }
 }
