@@ -17,7 +17,7 @@ export class ClubsListComponent {
 
   userClubs: any;
 
-  constructor(private clubsProvider: ClubsProvider) {
+  constructor(private clubsProvider: ClubsProvider, private navController: NavController) {
     console.log('Hello ClubsListComponent Component');
     this.userClubs = this.clubsProvider.getUserClubs();
   }
@@ -28,5 +28,6 @@ export class ClubsListComponent {
 
   gotoDetail(club: ClubModel) {
     alert("ir a " + club.name)
+    this.navController.push("ClubsDetailPage")
   }
 }

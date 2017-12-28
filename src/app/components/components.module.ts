@@ -7,14 +7,19 @@ import { RoutesListComponent } from './routes-list/routes-list';
 import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-subcribed';
 import { ClubsListComponent } from './clubs-list/clubs-list';
 import { ClubsDetailComponent } from './clubs-detail/clubs-detail';
+
 @NgModule({
-  declarations: [RoutesDetailComponent,
+  declarations: [
+    RoutesDetailComponent,
     RoutesListComponent,
     ProfileDetailComponent,
     ClubsListSubcribedComponent,
     ClubsListComponent,
     ClubsDetailComponent],
-  imports: [BrowserModule, IonicModule],
+  imports: [
+    BrowserModule,
+    IonicModule
+  ],
   exports: [
     ProfileDetailComponent,
     RoutesDetailComponent,

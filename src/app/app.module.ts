@@ -35,11 +35,12 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp, ClubsPage,
+    MyApp,
+    ClubsPage,
     ProfilePage,
     HomePage,
     LoginPage,
-    RoutesPage
+    RoutesPage,
   ],
   imports: [
     BrowserModule,
