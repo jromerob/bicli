@@ -9,10 +9,6 @@ import { NgForm } from '@angular/forms';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-@IonicPage({
-  name: 'profile',
-  segment: 'profile'
-})
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -21,11 +17,11 @@ export class ProfilePage implements OnInit {
   profile: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private profileProvider: ProfileProvider) {
-
+    this.profile = this.profileProvider.profile;
   }
 
   ngOnInit() {
-    this.profile = this.profileProvider.profile;
+
   }
 
 

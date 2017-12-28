@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-list>
     <form #formProfile="ngForm" (ngSubmit)="updateProfile(formProfile)">
-      <ion-item>
+       <ion-item>
         <ion-label floating>Nombre</ion-label>
         <ion-input [(ngModel)]="profile.name" name="name" type="text" autocapitalize="off" required>
         </ion-input>
