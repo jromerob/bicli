@@ -7,17 +7,21 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
+
 import { MyApp } from './app.component';
+
 import { HomePage } from '../pages/home/home';
 import { RoutesPage } from '../pages/routes/routes';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
+import { ClubsPage } from '../pages/clubs/clubs';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { RoutesProvider } from './providers/routes.provider';
 
 
 export const firebaseConfig = {
@@ -31,11 +35,11 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,
+    MyApp,ClubsPage,
+    ProfilePage,
     HomePage,
-    RoutesPage,
     LoginPage,
-    ProfilePage
+    RoutesPage
   ],
   imports: [
     BrowserModule,
@@ -43,15 +47,16 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ClubsPage,
+    ProfilePage,
     HomePage,
-    RoutesPage,
     LoginPage,
-    ProfilePage
+    RoutesPage
   ],
   providers: [
     StatusBar,
@@ -59,6 +64,7 @@ export const firebaseConfig = {
     AuthProvider,
     ProfileProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RoutesProvider,
 
 
   ]

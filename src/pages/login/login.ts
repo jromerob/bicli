@@ -10,7 +10,6 @@ import { ProfileModel } from '../../app/models/profile.model';
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'

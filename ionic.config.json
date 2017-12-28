@@ -1,6 +1,6 @@
 {
   "name": "bicli",
-  "app_id": "",
+  "app_id": "3052a408",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
