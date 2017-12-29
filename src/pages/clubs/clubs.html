@@ -5,17 +5,41 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar color="primary">
+
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Clubs</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="navToAddClub()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-buttons>
   </ion-navbar>
 
+  <!-- <ion-toolbar color="secondary">
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Clubs</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal">
+      <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-toolbar> -->
 </ion-header>
 
-
 <ion-content padding>
-  <clubs-list (ClubClick)="gotoClubDetail($event)"></clubs-list>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col col-12 offset-md-3 col-md-6>
+        <clubs-list (ClubClick)="navToClubDetail($event)"></clubs-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

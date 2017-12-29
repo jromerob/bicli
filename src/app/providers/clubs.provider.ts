@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClubModel } from '../models/club.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { AuthProvider } from './auth.provider';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -20,7 +19,7 @@ export class ClubsProvider {
   private clubsCollection: AngularFirestoreCollection<ClubModel>;
   private clubDocRef: AngularFirestoreDocument<ClubModel>;
 
-  constructor(private angularFirestore: AngularFirestore, private authProvider: AuthProvider) {
+  constructor(private angularFirestore: AngularFirestore) {
     //
     this.clubsCollection = this.angularFirestore.collection('clubs');
     this.userClubs$ = this.clubsCollection.snapshotChanges().map(actions => {
@@ -33,10 +32,13 @@ export class ClubsProvider {
   }
 
 
-  addClub(club: ClubModel) {
+  addClub(club: ClubModel, adminUID: string) {
     // Persist a document id
     club.id = this.angularFirestore.createId();
-    this.clubsCollection.add(club);
+    club.admin = adminUID;
+    let clubObj = Object.assign({}, club)
+    this.clubsCollection.doc(club.id).set(clubObj)
+
   }
 
   update(club: ClubModel) {

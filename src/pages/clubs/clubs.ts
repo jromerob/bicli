@@ -22,8 +22,10 @@ export class ClubsPage {
     console.log('ionViewDidLoad ClubsPage');
   }
 
-  gotoClubDetail(club: any) {
+  navToClubDetail(club: any) {
     this.navCtrl.push(ClubDetailPage, { club: club })
   }
-
+  navToAddClub() {
+    this.navCtrl.push(ClubDetailPage, {})
+  }
 }

@@ -1,22 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ClubModel } from '../../models/club.model';
+import { ClubsProvider } from '../../providers/clubs.provider';
+import { ProfileProvider } from '../../providers/profile.provider';
+import { Observable } from 'rxjs/Observable';
 
-/**
- * Generated class for the ClubsDetailComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'clubs-detail',
   templateUrl: 'clubs-detail.html'
 })
-export class ClubsDetailComponent {
+export class ClubsDetailComponent implements OnInit {
 
-  text: string;
+  @Input() club: ClubModel
+  @Input() mode: string;
+  @Output() OnNewClub = new EventEmitter<ClubModel>();
+  @Output() OnUpdateClub = new EventEmitter<ClubModel>();
+  clubObservable: Observable<ClubModel>;
 
-  constructor() {
-    console.log('Hello ClubsDetailComponent Component');
-    this.text = 'Hello World';
+  constructor(public navCtrl: NavController, public navParams: NavParams, private clubsProvider: ClubsProvider, private profileProvider: ProfileProvider) {
+  }
+
+  ngOnInit() {
+    //this.club ? this.mode = "edit" : this.mode = "add";
+    if (this.mode == "edit") {
+      this.clubObservable = this.clubsProvider.get(this.club.id);
+      this.clubObservable.subscribe(
+        club => this.club = club
+      )
+    }
+    // else {
+    //   this.club = new ClubModel();
+    // }
+  }
+
+  update() {
+    this.clubsProvider.update(this.club);
+    this.OnUpdateClub.emit(this.club);
+  }
+
+  add() {
+    this.clubsProvider.addClub(this.club, this.profileProvider.profile.id)
+    this.OnNewClub.emit(this.club);
+
   }
 
 }

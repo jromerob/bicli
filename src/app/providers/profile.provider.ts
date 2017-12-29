@@ -43,6 +43,7 @@ export class ProfileProvider {
   create(uid: string, profile: ProfileModel) {
     this.profileCollection = this.angularFirestore.collection('profiles');
     this.profile = profile;
+    this.profile.id = uid;
     //fireStore no admite clases personalizadas, deben ser objetos
     //https://stackoverflow.com/questions/37300338/how-can-i-convert-a-typescript-object-to-a-plain-object
     let profileObj = Object.assign({}, this.profile)

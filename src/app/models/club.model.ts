@@ -11,6 +11,9 @@ export class ClubModel {
   town: string = "";
   admin: string = ""; //id de usuario en firebase Auth
 
-  constructor() { }
+  constructor() {
+    this.coordinates = { lat: "", lon: "" }
+  }
+
 
 }

@@ -15,31 +15,25 @@ import { Observable } from 'rxjs/Observable';
   selector: 'page-club-detail',
   templateUrl: 'club-detail.html',
 })
-export class ClubDetailPage implements OnInit {
+export class ClubDetailPage {
 
-  //club: ClubModel = null;
   club: ClubModel
-  clubObservable: Observable<ClubModel>;
+  mode: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private clubsProvider: ClubsProvider) {
-
+  constructor(public navParams: NavParams, private navController: NavController) {
+    this.club = this.navParams.get("club") as ClubModel;
+    if (this.club) {
+      //si recibimos club por paramtros estamos en edicion
+      this.mode = "edit";
+    } else {
+      //si no recibimos club por paramtros estamos en nuevo por lo que creamos un nuevo objeto
+      this.mode = "add"
+      this.club = new ClubModel();
+    }
   }
 
-  ngOnInit() {
-    let club = this.navParams.get("club") as ClubModel;
-    this.clubObservable = this.clubsProvider.get(club.id);
-    this.clubObservable.subscribe(club => this.club = club)
-
-  }
-
-
-  update(club) {
-    this.clubsProvider.update(club);
-  }
-
-  ionViewDidLoad() {
-
-    console.log('ionViewDidLoad ClubsDetailPage');
+  navToBack() {
+    this.navController.pop();
 
   }
 
