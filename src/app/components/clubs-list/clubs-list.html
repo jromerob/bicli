@@ -1,4 +1,4 @@
-<ion-list>
+<ion-list *ngIf="userClubs;else spinner">
   <button ion-item *ngFor="let club of userClubs" detail-push (click)="emitClubClick(club)">
     <ion-icon item-start name="bicycle"></ion-icon>
     <ion-label>
@@ -7,3 +7,6 @@
     <ion-toggle (ionChange)="suscribeToClub(club)"></ion-toggle>
   </button>
 </ion-list>
+<ng-template #spinner>
+  <ion-spinner></ion-spinner>
+</ng-template>

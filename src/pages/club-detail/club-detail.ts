@@ -19,6 +19,7 @@ export class ClubDetailPage implements OnInit {
 
   //club: ClubModel = null;
   club: ClubModel
+  clubObservable: Observable<ClubModel>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private clubsProvider: ClubsProvider) {
 
@@ -26,8 +27,11 @@ export class ClubDetailPage implements OnInit {
 
   ngOnInit() {
     let club = this.navParams.get("club") as ClubModel;
-    this.clubsProvider.get(club.id).subscribe(club => this.club = club)
+    this.clubObservable = this.clubsProvider.get(club.id);
+    this.clubObservable.subscribe(club => this.club = club)
+
   }
+
 
   update(club) {
     this.clubsProvider.update(club);

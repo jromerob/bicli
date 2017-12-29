@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ClubsProvider } from '../../providers/clubs.provider';
 import { ClubModel } from '../../models/club.model';
 import { NavController, NavParams } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * Generated class for the ClubsListComponent component.
@@ -13,18 +14,24 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'clubs-list',
   templateUrl: 'clubs-list.html'
 })
-export class ClubsListComponent {
+export class ClubsListComponent implements OnDestroy {
   @Output() ClubClick = new EventEmitter<ClubModel>();
 
   userClubs: ClubModel[];
+  getClubSuscription: Subscription;
 
   constructor(private clubsProvider: ClubsProvider, private navController: NavController) {
     console.log('Hello ClubsListComponent Component');
-    this.clubsProvider.getClubs().subscribe(clubs => this.userClubs = clubs);
+    this.getClubSuscription = this.clubsProvider.getClubs().subscribe(clubs => this.userClubs = clubs);
+  }
+
+  ngOnDestroy() {
+    this.getClubSuscription.unsubscribe();
   }
 
   suscribeToClub(club: ClubModel) {
     alert("suscrito a " + club.name)
+
   }
 
   emitClubClick(club: ClubModel) {

@@ -17,46 +17,47 @@
 
 
 <ion-content padding *ngIf="club;else spinner">
-
-  <ion-item>
-    <ion-label floating>ID</ion-label>
-    <ion-input [(ngModel)]="club.id" name="id" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Nombre</ion-label>
-    <ion-input [(ngModel)]="club.name" name="name" type="text" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Abreviatura</ion-label>
-    <ion-input [(ngModel)]="club.abbreviation" name="abbreviation" type="text" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>email</ion-label>
-    <ion-input [(ngModel)]="club.email" name="email" type="email" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Telefono</ion-label>
-    <ion-input [(ngModel)]="club.phone" name="phone" type="text" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Ciudad</ion-label>
-    <ion-input [(ngModel)]="club.town" name="phone" type="text" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Coordenadas </ion-label>
-    <ion-input [(ngModel)]="club.coordinates" name="coordinates" type="text" autocapitalize="off" required>
-    </ion-input>
-  </ion-item>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>ID</ion-label>
+      <ion-input [(ngModel)]="club.id" name="id" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input [(ngModel)]="club.name" name="name" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Abreviatura</ion-label>
+      <ion-input [(ngModel)]="club.abbreviation" name="abbreviation" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>email</ion-label>
+      <ion-input [(ngModel)]="club.email" name="email" type="email" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Telefono</ion-label>
+      <ion-input [(ngModel)]="club.phone" name="phone" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Ciudad</ion-label>
+      <ion-input [(ngModel)]="club.town" name="phone" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Coordenadas </ion-label>
+      <ion-input [(ngModel)]="club.coordinates" name="coordinates" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+  </ion-list>
   <button ion-button type="submit" color="primary" block (click)="update(club)">
             Guardar cambios
-      </button>
+  </button>
 </ion-content>
 <ng-template #spinner>
-  <ion-spinner name="bubbles"></ion-spinner>
+  <ion-spinner></ion-spinner>
 </ng-template>
