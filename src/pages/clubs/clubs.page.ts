@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ClubDetailPage } from '../club-detail/club-detail';
+import { ClubDetailPage } from '../club-detail/club-detail.page';
 
 /**
  * Generated class for the ClubsPage page.
@@ -11,7 +11,7 @@ import { ClubDetailPage } from '../club-detail/club-detail';
 
 @Component({
   selector: 'page-clubs',
-  templateUrl: 'clubs.html',
+  templateUrl: 'clubs.page.html',
 })
 export class ClubsPage {
 

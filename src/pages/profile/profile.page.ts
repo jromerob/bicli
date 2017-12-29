@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { ProfileProvider } from '../../app/providers/profile.provider';
 import { NgForm } from '@angular/forms';
-import { HomePage } from '../home/home';
+import { HomePage } from '../home/home.page';
 
 /**
  * Generated class for the ProfilePage page.
@@ -12,7 +12,7 @@ import { HomePage } from '../home/home';
  */
 @Component({
   selector: 'page-profile',
-  templateUrl: 'profile.html',
+  templateUrl: 'profile.page.html',
 })
 export class ProfilePage implements OnInit {
   profile: any;

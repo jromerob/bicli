@@ -12,17 +12,17 @@ import { Subscription } from 'rxjs/Subscription';
  */
 @Component({
   selector: 'clubs-list',
-  templateUrl: 'clubs-list.html'
+  templateUrl: 'clubs-list.component.html'
 })
 export class ClubsListComponent implements OnDestroy {
   @Output() ClubClick = new EventEmitter<ClubModel>();
 
-  userClubs: ClubModel[];
+  clubs: ClubModel[];
   getClubSuscription: Subscription;
 
   constructor(private clubsProvider: ClubsProvider, private navController: NavController) {
     console.log('Hello ClubsListComponent Component');
-    this.getClubSuscription = this.clubsProvider.getClubs().subscribe(clubs => this.userClubs = clubs);
+    this.getClubSuscription = this.clubsProvider.getClubs().subscribe(clubs => this.clubs = clubs);
   }
 
   ngOnDestroy() {

@@ -9,12 +9,12 @@ import { ComponentsModule } from './components/components.module';
 
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
-import { RoutesPage } from '../pages/routes/routes';
-import { LoginPage } from '../pages/login/login';
-import { ProfilePage } from '../pages/profile/profile';
-import { ClubsPage } from '../pages/clubs/clubs';
-import { ClubDetailPage } from '../pages/club-detail/club-detail';
+import { HomePage } from '../pages/home/home.page';
+import { RoutesPage } from '../pages/routes/routes.page';
+import { LoginPage } from '../pages/login/login.page';
+import { ProfilePage } from '../pages/profile/profile.page';
+import { ClubsPage } from '../pages/clubs/clubs.page';
+import { ClubDetailPage } from '../pages/club-detail/club-detail.page';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';

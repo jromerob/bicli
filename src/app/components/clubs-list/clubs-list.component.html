@@ -1,5 +1,5 @@
 <ion-list *ngIf="userClubs;else spinner">
-  <button ion-item *ngFor="let club of userClubs" detail-push (click)="emitClubClick(club)">
+  <button ion-item *ngFor="let club of clubs" detail-push (click)="emitClubClick(club)">
     <ion-icon item-start name="bicycle"></ion-icon>
     <ion-label>
       {{club.name}} - {{club.town}}

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'clubs-detail',
-  templateUrl: 'clubs-detail.html'
+  templateUrl: 'clubs-detail.component.html'
 })
 export class ClubsDetailComponent implements OnInit {
 

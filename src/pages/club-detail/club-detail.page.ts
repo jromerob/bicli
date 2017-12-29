@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-club-detail',
-  templateUrl: 'club-detail.html',
+  templateUrl: 'club-detail.page.html',
 })
 export class ClubDetailPage {
 

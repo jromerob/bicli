@@ -12,7 +12,7 @@ import { ProfileModel } from '../../app/models/profile.model';
  */
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.page.html'
 })
 export class LoginPage {
 
