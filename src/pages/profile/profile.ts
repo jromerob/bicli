@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { ProfileProvider } from '../../app/providers/profile.provider';
 import { NgForm } from '@angular/forms';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,7 +32,7 @@ export class ProfilePage implements OnInit {
 
   updateProfile(form: NgForm) {
     this.profileProvider.update(this.profile);
-    this.navCtrl.popToRoot();
+    this.navCtrl.setRoot(HomePage);
   }
 
   gotoChangePass() {

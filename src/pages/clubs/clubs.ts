@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ClubDetailPage } from '../club-detail/club-detail';
 
 /**
  * Generated class for the ClubsPage page.
@@ -19,6 +20,10 @@ export class ClubsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClubsPage');
+  }
+
+  gotoClubDetail(club: any) {
+    this.navCtrl.push(ClubDetailPage, { club: club })
   }
 
 }

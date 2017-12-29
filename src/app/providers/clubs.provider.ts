@@ -15,33 +15,42 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ClubsProvider {
 
-  private userClubs: ClubModel[];
   private userClubs$: Observable<ClubModel[]>;
   private clubs$: Observable<ClubModel>;
   private clubsCollection: AngularFirestoreCollection<ClubModel>;
-  private itemDocRef: AngularFirestoreDocument<ClubModel>;
+  private clubDocRef: AngularFirestoreDocument<ClubModel>;
 
   constructor(private angularFirestore: AngularFirestore, private authProvider: AuthProvider) {
-    console.log('Hello ClubsProvider Provider');
+    //
+    this.clubsCollection = this.angularFirestore.collection('clubs');
+    this.userClubs$ = this.clubsCollection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as ClubModel;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
   }
 
 
   addClub(club: ClubModel) {
+    // Persist a document id
+    club.id = this.angularFirestore.createId();
     this.clubsCollection.add(club);
   }
 
+  update(club: ClubModel) {
+    this.clubDocRef.update(club);
+  }
 
-  getUserClubs(): Observable<ClubModel[]> {
-    this.clubsCollection = this.angularFirestore.collection('clubs');
-    this.userClubs$ = this.clubsCollection.valueChanges();
+  get(id): Observable<any> {
+    this.clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${id}`);
+    return this.clubDocRef.valueChanges();
+  };
+
+
+  getClubs(): Observable<ClubModel[]> {
     return this.userClubs$
   }
-
-  getAllClubs(): Observable<ClubModel> {
-    this.clubsCollection = this.angularFirestore.collection('clubs');
-    this.clubs$ = this.itemDocRef.valueChanges();
-    return this.clubs$
-  }
-
 
 }

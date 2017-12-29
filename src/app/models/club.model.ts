@@ -1,5 +1,5 @@
 export class ClubModel {
-  $key?: string;
+  id?: string;
   email: string = "";
   name: string = "";
   abbreviation: string = "";

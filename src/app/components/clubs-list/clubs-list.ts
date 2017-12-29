@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ClubsProvider } from '../../providers/clubs.provider';
 import { ClubModel } from '../../models/club.model';
 import { NavController, NavParams } from 'ionic-angular';
@@ -14,20 +14,20 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'clubs-list.html'
 })
 export class ClubsListComponent {
+  @Output() ClubClick = new EventEmitter<ClubModel>();
 
-  userClubs: any;
+  userClubs: ClubModel[];
 
   constructor(private clubsProvider: ClubsProvider, private navController: NavController) {
     console.log('Hello ClubsListComponent Component');
-    this.userClubs = this.clubsProvider.getUserClubs();
+    this.clubsProvider.getClubs().subscribe(clubs => this.userClubs = clubs);
   }
 
   suscribeToClub(club: ClubModel) {
     alert("suscrito a " + club.name)
   }
 
-  gotoDetail(club: ClubModel) {
-    alert("ir a " + club.name)
-    this.navController.push("ClubsDetailPage")
+  emitClubClick(club: ClubModel) {
+    this.ClubClick.emit(club);
   }
 }

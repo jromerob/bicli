@@ -14,6 +14,7 @@ import { RoutesPage } from '../pages/routes/routes';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { ClubsPage } from '../pages/clubs/clubs';
+import { ClubDetailPage } from '../pages/club-detail/club-detail';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
@@ -37,6 +38,7 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     ClubsPage,
+    ClubDetailPage,
     ProfilePage,
     HomePage,
     LoginPage,
@@ -55,6 +57,7 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     ClubsPage,
+    ClubDetailPage,
     ProfilePage,
     HomePage,
     LoginPage,
