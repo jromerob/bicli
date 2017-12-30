@@ -1,5 +1,6 @@
 export class ClubModel {
   id?: string;
+  logo: string = "";
   email: string = "";
   name: string = "";
   abbreviation: string = "";

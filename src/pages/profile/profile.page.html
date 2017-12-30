@@ -13,10 +13,16 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
+  <ion-card no-padding>
+    <ion-avatar>
+      <img [src]="profile.avatar">
+    </ion-avatar>
+  </ion-card>
   <ion-list>
     <form #formProfile="ngForm" (ngSubmit)="updateProfile(formProfile)">
-       <ion-item>
+      <ion-item>
         <ion-label floating>Nombre</ion-label>
         <ion-input [(ngModel)]="profile.name" name="name" type="text" autocapitalize="off" required>
         </ion-input>
@@ -43,7 +49,7 @@
         </ion-input>
       </ion-item>
 
-      <button ion-button [hidden]="!formProfile.valid || formProfile.pristine" type="submit" color="primary" block>
+      <button ion-button [hidden]="formProfile.pristine" [disabled]="!formProfile.valid" type="submit" color="primary" block>
                 Guardar cambios
           </button>
       <button ion-button type="submit" color="primary" block (click)="gotoChangePass()">

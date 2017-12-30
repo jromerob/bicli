@@ -1,5 +1,6 @@
 export class ProfileModel {
   id?: string;
+  avatar: string = "";
   email: string = "";
   password: string;
   name: string = "";

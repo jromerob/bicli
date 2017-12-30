@@ -31,8 +31,24 @@ export class ProfileProvider {
       });
   }
 
-  update(profile: ProfileModel) {
-    this.profileDocRef.update(profile);
+  isSuscribedTo(ClubId: string): boolean {
+    let found = this.profile.clubs.indexOf(ClubId) >= 0
+    return found;
+  }
+
+  suscribeToClub(ClubId: string): Promise<void> {
+    this.profile.clubs.push(ClubId)
+    return this.update(this.profile);
+  }
+
+  unsuscribeToClub(ClubId: string): Promise<void> {
+    let i = this.profile.clubs.indexOf(ClubId);
+    if (i >= 0) this.profile.clubs.splice(i, 1)
+    return this.update(this.profile);
+  }
+
+  update(profile: ProfileModel): Promise<void> {
+    return this.profileDocRef.update(profile);
   }
 
   unSet() {
@@ -40,14 +56,14 @@ export class ProfileProvider {
     this.profile$ = null;
   }
 
-  create(uid: string, profile: ProfileModel) {
+  create(uid: string, profile: ProfileModel): Promise<void> {
     this.profileCollection = this.angularFirestore.collection('profiles');
     this.profile = profile;
     this.profile.id = uid;
     //fireStore no admite clases personalizadas, deben ser objetos
     //https://stackoverflow.com/questions/37300338/how-can-i-convert-a-typescript-object-to-a-plain-object
     let profileObj = Object.assign({}, this.profile)
-    this.profileCollection.doc(uid).set(profileObj)
+    return this.profileCollection.doc(uid).set(profileObj)
 
   }
 

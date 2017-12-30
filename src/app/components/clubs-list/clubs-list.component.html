@@ -1,11 +1,18 @@
-<ion-list *ngIf="userClubs;else spinner">
-  <button ion-item *ngFor="let club of clubs" detail-push (click)="emitClubClick(club)">
-    <ion-icon item-start name="bicycle"></ion-icon>
+<ion-list *ngIf="clubs;else spinner" no-padding no-margin>
+  <!-- <button ion-item *ngFor="let club of clubs" detail-push (click)="emitClubClick(club)">
     <ion-label>
       {{club.name}} - {{club.town}}
+   <h3 *ngIf="isAdministratedByMe(club)">admin</h3>
     </ion-label>
+
     <ion-toggle (ionChange)="suscribeToClub(club)"></ion-toggle>
-  </button>
+  </button> -->
+  <ion-item *ngFor="let club of clubs" detail-push (click)="emitClubClick(club)" no-padding>
+    <ion-label>{{club.name}} - {{club.town}}
+    </ion-label>
+    <ion-icon name="cog" item-end *ngIf="isAdministratedByMe(club)"></ion-icon>
+    <ion-toggle [checked]="isSuscribedTo(club)" (ionChange)="changeSuscriptionToClub(club,$event.value)" *ngIf="!isAdministratedByMe(club)"></ion-toggle>
+  </ion-item>
 </ion-list>
 <ng-template #spinner>
   <ion-spinner></ion-spinner>

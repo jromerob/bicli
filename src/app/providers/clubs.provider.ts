@@ -32,20 +32,21 @@ export class ClubsProvider {
   }
 
 
-  addClub(club: ClubModel, adminUID: string) {
+  addClub(club: ClubModel, adminUID: string): Promise<void> {
     // Persist a document id
     club.id = this.angularFirestore.createId();
     club.admin = adminUID;
     let clubObj = Object.assign({}, club)
-    this.clubsCollection.doc(club.id).set(clubObj)
+    return this.clubsCollection.doc(club.id).set(clubObj)
 
   }
 
-  update(club: ClubModel) {
-    this.clubDocRef.update(club);
+
+  update(club: ClubModel): Promise<void> {
+    return this.clubDocRef.update(club);
   }
 
-  get(id): Observable<any> {
+  get(id): Observable<ClubModel> {
     this.clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${id}`);
     return this.clubDocRef.valueChanges();
   };

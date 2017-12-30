@@ -18,6 +18,7 @@ import { ClubDetailPage } from '../pages/club-detail/club-detail.page';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
+import { ToastProvider } from './providers/toast.provider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -71,6 +72,7 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RoutesProvider,
     ClubsProvider,
+    ToastProvider
   ]
 })
 export class AppModule { }

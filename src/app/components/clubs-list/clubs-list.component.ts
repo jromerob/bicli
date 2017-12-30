@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ClubsProvider } from '../../providers/clubs.provider';
+import { ProfileProvider } from '../../providers/profile.provider';
 import { ClubModel } from '../../models/club.model';
 import { NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
@@ -20,7 +21,7 @@ export class ClubsListComponent implements OnDestroy {
   clubs: ClubModel[];
   getClubSuscription: Subscription;
 
-  constructor(private clubsProvider: ClubsProvider, private navController: NavController) {
+  constructor(private clubsProvider: ClubsProvider, private navController: NavController, private profileProvider: ProfileProvider) {
     console.log('Hello ClubsListComponent Component');
     this.getClubSuscription = this.clubsProvider.getClubs().subscribe(clubs => this.clubs = clubs);
   }
@@ -29,8 +30,21 @@ export class ClubsListComponent implements OnDestroy {
     this.getClubSuscription.unsubscribe();
   }
 
-  suscribeToClub(club: ClubModel) {
-    alert("suscrito a " + club.name)
+  isAdministratedByMe(club: ClubModel): boolean {
+    return club.admin == this.profileProvider.profile.id;
+  }
+
+  isSuscribedTo(club: ClubModel): boolean {
+    return this.profileProvider.isSuscribedTo(club.id);
+
+  }
+
+  changeSuscriptionToClub(club: ClubModel, suscribe: boolean) {
+    if (suscribe) {
+      this.profileProvider.suscribeToClub(club.id)
+    } else {
+      this.profileProvider.unsuscribeToClub(club.id)
+    }
 
   }
 
