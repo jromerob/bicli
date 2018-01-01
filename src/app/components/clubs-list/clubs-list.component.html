@@ -10,7 +10,10 @@
   <ion-item *ngFor="let club of clubs|async" detail-push (click)="emitClubClick(club)" no-padding>
     <ion-label>{{club.name}} - {{club.town}}
     </ion-label>
-    <ion-icon name="cog" item-end *ngIf="isAdministratedByMe(club)"></ion-icon>
+    <!-- <ion-icon name="cog" item-end *ngIf="isAdministratedByMe(club)"></ion-icon> -->
+    <p *ngIf="isAdministratedByMe(club)" item-end>
+      admin
+    </p>
     <ion-toggle [checked]="isSuscribedTo(club)" (ionChange)="changeSuscriptionToClub(club,$event.value)" *ngIf="!isAdministratedByMe(club)"></ion-toggle>
   </ion-item>
 </ion-list>

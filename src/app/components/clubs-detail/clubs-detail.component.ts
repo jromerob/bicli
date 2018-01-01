@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ClubModel } from '../../models';
 import { CONFIG_APP } from '../../constants/config-app.constant';
@@ -6,18 +6,20 @@ import { ClubsProvider } from '../../providers/clubs.provider';
 import { ProfileProvider } from '../../providers/profile.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'clubs-detail',
   templateUrl: 'clubs-detail.component.html'
 })
-export class ClubsDetailComponent implements OnInit {
+export class ClubsDetailComponent implements OnInit, OnDestroy {
 
   @Input() club: ClubModel
   @Input() mode: string;
   @Output() OnNewClub = new EventEmitter<ClubModel>();
   @Output() OnUpdateClub = new EventEmitter<ClubModel>();
   clubObservable: Observable<ClubModel>;
+  clubObservableSuscription: Subscription;
 
 
 
@@ -25,14 +27,24 @@ export class ClubsDetailComponent implements OnInit {
 
   }
 
+
+  /**
+   * [ngOnInit description]
+   * @return {[type]} [description]
+   * Inicilizacion del componente, en el modo edición
+   * 1º Obtenemos el observable del documento por id del club
+   * 2º Nos suscribimos al observable y asignamos el objeto club recibido con los
+   * cambios a la propiedad club del componente
+   */
   ngOnInit() {
-    if (this.club) {
-      if (this.club.logo == "") this.club.logo = CONFIG_APP.images.defaultClubLogo;
-    }
-    //this.club ? this.mode = "edit" : this.mode = "add";
+    // if (this.club) {
+    //   if (this.club.logo == "") this.club.logo = CONFIG_APP.images.defaultClubLogo;
+    // }
+    this.club && (this.club.logo == "") ? this.club.logo = CONFIG_APP.images.defaultClubLogo : this.club.logo = this.club.logo;
+
     if (this.mode == "edit") {
       this.clubObservable = this.clubsProvider.get(this.club.id);
-      this.clubObservable.subscribe(
+      this.clubObservableSuscription = this.clubObservable.subscribe(
         club => {
           this.club = club
           if (this.club.logo == "") this.club.logo = CONFIG_APP.images.defaultClubLogo;
@@ -41,9 +53,10 @@ export class ClubsDetailComponent implements OnInit {
 
     }
 
-    // else {
-    //   this.club = new ClubModel();
-    // }
+  }
+
+  ngOnDestroy() {
+    if (this.mode == "edit") this.clubObservableSuscription.unsubscribe();
   }
 
   update() {
@@ -57,7 +70,11 @@ export class ClubsDetailComponent implements OnInit {
 
   add() {
     this.clubsProvider.addClub(this.club, this.profileProvider.profile.id)
-    this.OnNewClub.emit(this.club);
+      .then(_ => {
+        this.clubsProvider.addSuscriber(this.club, this.profileProvider.profile.id)
+        this.profileProvider.suscribeToClub(this.club.id)
+        this.OnNewClub.emit(this.club);
+      })
 
   }
 

@@ -17,7 +17,7 @@ import { ToastProvider } from '../../providers/toast.provider';
   selector: 'clubs-list',
   templateUrl: 'clubs-list.component.html'
 })
-export class ClubsListComponent implements OnInit {
+export class ClubsListComponent implements OnInit, OnDestroy {
   @Output() ClubClick = new EventEmitter<ClubModel>();
   @Input() filterByAdmin: boolean;
   @Input() filterBySuscribed: boolean;
@@ -41,6 +41,10 @@ export class ClubsListComponent implements OnInit {
         return this.filterClubs(clubs)
       }
     )
+  }
+
+  ngOnDestroy() {
+    this.clubs.subscribe().unsubscribe();
   }
 
   isAdministratedByMe(club: ClubModel): boolean {

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ClubModel } from '../models/club.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -13,7 +12,6 @@ import { Observable } from 'rxjs/Observable';
 */
 @Injectable()
 export class ClubsProvider {
-  //private clubs: ClubModel[] = [];
   public clubs: Observable<ClubModel[]>;
   private clubsCollection: AngularFirestoreCollection<ClubModel>;
   private clubDocRef: AngularFirestoreDocument<ClubModel>;
@@ -21,15 +19,15 @@ export class ClubsProvider {
   constructor(private angularFirestore: AngularFirestore) {
     //
     this.clubsCollection = this.angularFirestore.collection('clubs');
-    //this.clubs = this.clubsCollection.valueChanges();
+    this.clubs = this.clubsCollection.valueChanges();
 
-    this.clubs = this.clubsCollection.snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as ClubModel;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    });
+    // this.clubs = this.clubsCollection.snapshotChanges().map(actions => {
+    //   return actions.map(a => {
+    //     const data = a.payload.doc.data() as ClubModel;
+    //     const id = a.payload.doc.id;
+    //     return { id, ...data };
+    //   });
+    // });
   }
 
 
@@ -42,17 +40,6 @@ export class ClubsProvider {
 
   }
 
-  // addSuscriber(club: ClubModel, suscriber: string) {
-  //   let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
-  //   let clubDoc$ = clubDocRef.valueChanges().subscribe(
-  //     club => {
-  //       clubDoc$.unsubscribe()
-  //       club.subscribers.push(suscriber)
-  //       clubDocRef.update(club)
-  //     }
-  //   )
-  // }
-
   addSuscriber(club: ClubModel, suscriber: string): Promise<void> {
 
     let returPromise = new Promise<void>((resolve, reject) => {
@@ -63,8 +50,8 @@ export class ClubsProvider {
           clubDoc$.unsubscribe()
           club.subscribers.push(suscriber)
           clubDocRef.update(club)
-            .then(resolve())
-            .catch(reject(null))
+            .then(_ => resolve())
+            .catch(error => reject(error))
 
         }
       )
@@ -74,16 +61,26 @@ export class ClubsProvider {
   }
 
 
-  removeSuscriber(club: ClubModel, suscriber: string) {
-    let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
-    let clubDoc$ = clubDocRef.valueChanges().subscribe(
-      club => {
-        clubDoc$.unsubscribe()
-        let i = club.subscribers.indexOf(suscriber);
-        if (i >= 0) club.subscribers.splice(i, 1)
-        clubDocRef.update(club)
-      }
-    )
+  removeSuscriber(club: ClubModel, suscriber: string): Promise<void> {
+
+    let returPromise = new Promise<void>((resolve, reject) => {
+
+      let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
+      let clubDoc$ = clubDocRef.valueChanges().subscribe(
+        club => {
+          clubDoc$.unsubscribe()
+          let i = club.subscribers.indexOf(suscriber);
+          if (i >= 0) club.subscribers.splice(i, 1)
+          clubDocRef.update(club)
+            .then(_ => resolve())
+            .catch(error => reject(error))
+
+        }
+      )
+    })
+
+    return returPromise;
+
   };
 
 

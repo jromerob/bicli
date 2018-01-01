@@ -41,6 +41,7 @@ export class ProfileProvider {
     return this.update(this.profile);
   }
 
+
   unsuscribeToClub(ClubId: string): Promise<void> {
     let i = this.profile.clubs.indexOf(ClubId);
     if (i >= 0) this.profile.clubs.splice(i, 1)
