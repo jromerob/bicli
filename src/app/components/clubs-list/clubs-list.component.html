@@ -7,7 +7,7 @@
 
     <ion-toggle (ionChange)="suscribeToClub(club)"></ion-toggle>
   </button> -->
-  <ion-item *ngFor="let club of clubs" detail-push (click)="emitClubClick(club)" no-padding>
+  <ion-item *ngFor="let club of clubs|async" detail-push (click)="emitClubClick(club)" no-padding>
     <ion-label>{{club.name}} - {{club.town}}
     </ion-label>
     <ion-icon name="cog" item-end *ngIf="isAdministratedByMe(club)"></ion-icon>

@@ -13,16 +13,17 @@ import { Observable } from 'rxjs/Observable';
 */
 @Injectable()
 export class ClubsProvider {
-
-  private userClubs$: Observable<ClubModel[]>;
-  private clubs$: Observable<ClubModel>;
+  //private clubs: ClubModel[] = [];
+  public clubs: Observable<ClubModel[]>;
   private clubsCollection: AngularFirestoreCollection<ClubModel>;
   private clubDocRef: AngularFirestoreDocument<ClubModel>;
 
   constructor(private angularFirestore: AngularFirestore) {
     //
     this.clubsCollection = this.angularFirestore.collection('clubs');
-    this.userClubs$ = this.clubsCollection.snapshotChanges().map(actions => {
+    //this.clubs = this.clubsCollection.valueChanges();
+
+    this.clubs = this.clubsCollection.snapshotChanges().map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as ClubModel;
         const id = a.payload.doc.id;
@@ -41,6 +42,51 @@ export class ClubsProvider {
 
   }
 
+  // addSuscriber(club: ClubModel, suscriber: string) {
+  //   let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
+  //   let clubDoc$ = clubDocRef.valueChanges().subscribe(
+  //     club => {
+  //       clubDoc$.unsubscribe()
+  //       club.subscribers.push(suscriber)
+  //       clubDocRef.update(club)
+  //     }
+  //   )
+  // }
+
+  addSuscriber(club: ClubModel, suscriber: string): Promise<void> {
+
+    let returPromise = new Promise<void>((resolve, reject) => {
+
+      let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
+      let clubDoc$ = clubDocRef.valueChanges().subscribe(
+        club => {
+          clubDoc$.unsubscribe()
+          club.subscribers.push(suscriber)
+          clubDocRef.update(club)
+            .then(resolve())
+            .catch(reject(null))
+
+        }
+      )
+    })
+
+    return returPromise;
+  }
+
+
+  removeSuscriber(club: ClubModel, suscriber: string) {
+    let clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${club.id}`);
+    let clubDoc$ = clubDocRef.valueChanges().subscribe(
+      club => {
+        clubDoc$.unsubscribe()
+        let i = club.subscribers.indexOf(suscriber);
+        if (i >= 0) club.subscribers.splice(i, 1)
+        clubDocRef.update(club)
+      }
+    )
+  };
+
+
 
   update(club: ClubModel): Promise<void> {
     return this.clubDocRef.update(club);
@@ -52,8 +98,6 @@ export class ClubsProvider {
   };
 
 
-  getClubs(): Observable<ClubModel[]> {
-    return this.userClubs$
-  }
+
 
 }
