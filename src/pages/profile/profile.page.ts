@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { ProfileProvider } from '../../app/providers/profile.provider';
-import { HomePage } from '../../pages/home/home';
-import { NgForm } from '@angular/forms';
 import { HomePage } from '../home/home.page';
+import { NgForm } from '@angular/forms';
 import { ProfileModel } from '../../app/models/profile.model';
 import { CONFIG_APP } from '../../app/constants/config-app.constant';
 
