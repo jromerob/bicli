@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { RouteDetailPage } from '../route-detail/route-detail.page';
 
 /**
  * Generated class for the RoutesPage page.
@@ -21,4 +22,7 @@ export class RoutesPage {
     console.log('ionViewDidLoad RoutesPage');
   }
 
+  navToAddRoute() {
+    this.navCtrl.push(RouteDetailPage, {})
+  }
 }

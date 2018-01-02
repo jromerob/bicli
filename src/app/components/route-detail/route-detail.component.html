@@ -1,0 +1,60 @@
+<ion-card no-padding>
+  <ion-avatar *ngIf="route.image!=''">
+    <img [src]="route.image">
+  </ion-avatar>
+  <h2 text-center>  {{route.name}} </h2>
+</ion-card>
+<form #formRoute="ngForm">
+  <ion-list>
+    <ion-item>
+      <ion-label>Club</ion-label>
+      <ion-select [(ngModel)]="route.clubId" name="clubId">
+        <ion-option *ngFor="let userClub of userClubs " [value]="userClub?.id">{{userClub?.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label floating>Club</ion-label>
+      <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Recorrido</ion-label>
+      <ion-input [(ngModel)]="route.route" name="route" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Distancia</ion-label>
+      <ion-input [(ngModel)]="route.distance" name="distance" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Nivel {{route.level}}</ion-label>
+      <ion-range no-padding pin="true" min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
+        <ion-icon small range-left name="battery-dead"></ion-icon>
+        <ion-icon range-right name="battery-charging"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tipo de Ruta</ion-label>
+      <ion-select [(ngModel)]="route.category" name="category">
+        <ion-option *ngFor="let routeCategory of routeCategories " [value]="routeCategory.id">{{routeCategory.category}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Observaciones</ion-label>
+      <ion-input [(ngModel)]="route.observations" name="observations" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button type="submit" color="primary" [disabled]="!formRoute.valid" [hidden]="formRoute.pristine" block (click)="update()" *ngIf="mode=='edit'">
+    Guardar
+  </button>
+  <button ion-button type="submit" color="primary" block (click)="add()" *ngIf="mode=='add'">
+    Nueva
+    </button>
+</form>

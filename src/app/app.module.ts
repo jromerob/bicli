@@ -11,6 +11,7 @@ import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home.page';
 import { RoutesPage } from '../pages/routes/routes.page';
+import { RouteDetailPage } from '../pages/route-detail/route-detail.page';
 import { LoginPage } from '../pages/login/login.page';
 import { ProfilePage } from '../pages/profile/profile.page';
 import { ClubsPage } from '../pages/clubs/clubs.page';
@@ -44,6 +45,7 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     RoutesPage,
+    RouteDetailPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ export const firebaseConfig = {
     ProfilePage,
     HomePage,
     LoginPage,
-    RoutesPage
+    RoutesPage,
+    RouteDetailPage
   ],
   providers: [
     StatusBar,

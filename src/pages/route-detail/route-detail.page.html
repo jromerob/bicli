@@ -9,14 +9,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Rutas</ion-title>
+    <ion-title>Detalle Rutas</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-fab bottom right>
-    <button ion-fab (click)="navToAddRoute()" color="primary"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+  <route-detail [route]="route" [mode]="mode" (OnNewRoute)="navToBack()" (OnUpdateRoute)="navToBack()"></route-detail>
 
 </ion-content>
