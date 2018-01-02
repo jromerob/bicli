@@ -15,30 +15,41 @@ export class ProfileProvider {
   profile: ProfileModel;
   profile$: Observable<ProfileModel>;
   private profileCollection: AngularFirestoreCollection<ProfileModel>;
-  private itemDocRef: AngularFirestoreDocument<ProfileModel>;
+  private profileDocRef: AngularFirestoreDocument<ProfileModel>;
 
   constructor(private angularFirestore: AngularFirestore, private authProvider: AuthProvider) {
-    //let profileCollection = angularFirestore.collection<ProfileModel>('profiles');
-
-    // this.profileCollection = angularFirestore.collection('profiles', ref => ref.where('uid', '==', this.authProvider.auth.uid))
-    // console.log('Hello ProfileProvider Provider');
-    // @todo suscribir a los cambios dfe sesion
-    //    this.authProvider.Session.subscribe(
   }
 
   set(uid: string) {
-    this.itemDocRef = this.angularFirestore.doc<ProfileModel>(`profiles/${uid}`);
-    this.profile$ = this.itemDocRef.valueChanges();
+    this.profileDocRef = this.angularFirestore.doc<ProfileModel>(`profiles/${uid}`);
+    this.profile$ = this.profileDocRef.valueChanges();
 
-    this.itemDocRef.snapshotChanges().forEach(
+    this.profileDocRef.snapshotChanges().forEach(
       (doc: any) => {
         console.log("Obeniendo datos de usaurio !!!!!!!!!!!!!!!!!!!!!!!!!")
         this.profile = doc.payload.data()
       });
   }
 
-  update(profile: ProfileModel) {
-    this.itemDocRef.update(profile);
+  isSuscribedTo(ClubId: string): boolean {
+    let found = this.profile.clubs.indexOf(ClubId) >= 0
+    return found;
+  }
+
+  suscribeToClub(ClubId: string): Promise<void> {
+    this.profile.clubs.push(ClubId)
+    return this.update(this.profile);
+  }
+
+
+  unsuscribeToClub(ClubId: string): Promise<void> {
+    let i = this.profile.clubs.indexOf(ClubId);
+    if (i >= 0) this.profile.clubs.splice(i, 1)
+    return this.update(this.profile);
+  }
+
+  update(profile: ProfileModel): Promise<void> {
+    return this.profileDocRef.update(profile);
   }
 
   unSet() {
@@ -46,21 +57,14 @@ export class ProfileProvider {
     this.profile$ = null;
   }
 
-  create(uid: string, profile: ProfileModel) {
+  create(uid: string, profile: ProfileModel): Promise<void> {
     this.profileCollection = this.angularFirestore.collection('profiles');
     this.profile = profile;
-    //  this.profile.authUID = uid;
+    this.profile.id = uid;
     //fireStore no admite clases personalizadas, deben ser objetos
     //https://stackoverflow.com/questions/37300338/how-can-i-convert-a-typescript-object-to-a-plain-object
     let profileObj = Object.assign({}, this.profile)
-    // this.profileCollection.add(profileObj)
-    //   .then(_ => console.log("usurio creado"))
-    //   .catch(_ => {
-    //     this.authProvider.deleteProfile(uid)
-    //     this.profile = null;
-    //     console.log("Error al crear el usurio")
-    //   })
-    this.profileCollection.doc(uid).set(profileObj)
+    return this.profileCollection.doc(uid).set(profileObj)
 
   }
 

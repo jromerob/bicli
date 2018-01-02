@@ -1,0 +1,47 @@
+<ion-card no-padding>
+  <ion-avatar>
+    <img [src]="club.logo">
+  </ion-avatar>
+  <h2 text-center>  {{club.name}} </h2>
+</ion-card>
+<form #formClub="ngForm">
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input [(ngModel)]="club.name" name="name" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Abreviatura</ion-label>
+      <ion-input [(ngModel)]="club.abbreviation" name="abbreviation" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>email</ion-label>
+      <ion-input [(ngModel)]="club.email" name="email" type="email" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Telefono</ion-label>
+      <ion-input [(ngModel)]="club.phone" name="phone" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Ciudad</ion-label>
+      <ion-input [(ngModel)]="club.town" name="town" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Coordenadas </ion-label>
+      <ion-input [(ngModel)]="club.coordinates" name="coordinates" type="text" autocapitalize="off" required>
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button type="submit" color="primary" [disabled]="!formClub.valid" [hidden]="formClub.pristine" block (click)="update()" *ngIf="mode=='edit'">
+    Guardar
+  </button>
+  <button ion-button type="submit" color="primary" block (click)="add()" *ngIf="mode=='add'">
+    Nuevo
+    </button>
+</form>

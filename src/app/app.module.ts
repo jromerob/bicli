@@ -5,23 +5,25 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-
-
+import { ComponentsModule } from './components/components.module';
 
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
-import { RoutesPage } from '../pages/routes/routes';
-import { LoginPage } from '../pages/login/login';
-import { ProfilePage } from '../pages/profile/profile';
-import { ClubsPage } from '../pages/clubs/clubs';
+import { HomePage } from '../pages/home/home.page';
+import { RoutesPage } from '../pages/routes/routes.page';
+import { LoginPage } from '../pages/login/login.page';
+import { ProfilePage } from '../pages/profile/profile.page';
+import { ClubsPage } from '../pages/clubs/clubs.page';
+import { ClubDetailPage } from '../pages/club-detail/club-detail.page';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
+import { ToastProvider } from './providers/toast.provider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RoutesProvider } from './providers/routes.provider';
+import { ClubsProvider } from './providers/clubs.provider';
 
 
 export const firebaseConfig = {
@@ -35,11 +37,13 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    MyApp,ClubsPage,
+    MyApp,
+    ClubsPage,
+    ClubDetailPage,
     ProfilePage,
     HomePage,
     LoginPage,
-    RoutesPage
+    RoutesPage,
   ],
   imports: [
     BrowserModule,
@@ -48,11 +52,13 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     ClubsPage,
+    ClubDetailPage,
     ProfilePage,
     HomePage,
     LoginPage,
@@ -65,8 +71,8 @@ export const firebaseConfig = {
     ProfileProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RoutesProvider,
-
-
+    ClubsProvider,
+    ToastProvider
   ]
 })
 export class AppModule { }
