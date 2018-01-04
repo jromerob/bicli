@@ -1,4 +1,20 @@
-<!-- Generated template for the RoutesListComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-list *ngIf="routes;else spinner" no-padding no-margin>
+
+  <ion-item *ngFor="let route of routes|async" detail-push (click)="emitRouteClick(route)" no-padding>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-2 text-center>
+          <h2>{{route.distance}}</h2>
+        </ion-col>
+        <ion-col col-10>
+          <strong>{{getRouteTypeDescription(route.categoryId)}}</strong><br> {{route.route}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+</ion-list>
+
+<ng-template #spinner>
+  <ion-spinner></ion-spinner>
+</ng-template>

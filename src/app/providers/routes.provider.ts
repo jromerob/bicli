@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RouteModel } from '../models/route.model';
+import { CONFIG_APP } from '../constants/config-app.constant';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
@@ -24,6 +25,7 @@ export class RoutesProvider {
   private routesCollection: AngularFirestoreCollection<RouteModel>;
   private routeDocRef: AngularFirestoreDocument<RouteModel>;
 
+
   constructor(private angularFirestore: AngularFirestore) {
     //
     this.routesCollection = this.angularFirestore.collection('routes');
@@ -47,12 +49,26 @@ export class RoutesProvider {
     return this.routeDocRef.update(route);
   }
 
+  like(route: RouteModel, userId: string): Promise<void> {
+    route.likes++;
+    return this.update(route)
+  }
+
   get(id): Observable<RouteModel> {
     this.routeDocRef = this.angularFirestore.doc<RouteModel>(`routes/${id}`);
     return this.routeDocRef.valueChanges();
   };
 
+  getRouteTypeDescription(routeTypeId: number): string {
 
+    let descIndex = CONFIG_APP.routeCategories.find(
+      item => {
+        return item.id == routeTypeId;
+      });
+    return descIndex.category;
+
+
+  }
 
 
 }

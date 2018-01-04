@@ -22,7 +22,13 @@ export class RoutesPage {
     console.log('ionViewDidLoad RoutesPage');
   }
 
+  navToRouteDetail(route: any) {
+    this.navCtrl.push(RouteDetailPage, { route: route, mode: "view" })
+  }
   navToAddRoute() {
-    this.navCtrl.push(RouteDetailPage, {})
+    this.navCtrl.push(RouteDetailPage, { mode: "add" })
+  }
+  navToRouteEdit() {
+    this.navCtrl.push(RouteDetailPage, { mode: "edit" })
   }
 }

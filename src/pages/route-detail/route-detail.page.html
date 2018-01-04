@@ -14,7 +14,16 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <route-detail [route]="route" [mode]="mode" (OnNewRoute)="navToBack()" (OnUpdateRoute)="navToBack()"></route-detail>
-
+  <ion-fab bottom right>
+    <button ion-fab (click)="navToAddRoute()" color="primary"><ion-icon name=""></ion-icon></button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab color="secondary" (click)="navToAddRoute()"><ion-icon name="add" ></ion-icon></button>
+      <button ion-fab color="secondary" (click)="setModeRouteEdit()"><ion-icon name="create"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

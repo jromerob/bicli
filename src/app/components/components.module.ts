@@ -7,6 +7,7 @@ import { RoutesListComponent } from './routes-list/routes-list.component';
 import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-subcribed';
 import { ClubsListComponent } from './clubs-list/clubs-list.component';
 import { ClubsDetailComponent } from './clubs-detail/clubs-detail.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClubsDetailComponent } from './clubs-detail/clubs-detail.component';
     ClubsDetailComponent],
   imports: [
     BrowserModule,
-    IonicModule
+    IonicModule,
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCEaAc7-DAZiOKNpibxBwAfmPFqSBmsgF0' })
   ],
   exports: [
     ProfileDetailComponent,

@@ -5,6 +5,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AgmCoreModule } from '@agm/core';
+
 import { ComponentsModule } from './components/components.module';
 
 import { MyApp } from './app.component';
@@ -20,7 +22,6 @@ import { ClubDetailPage } from '../pages/club-detail/club-detail.page';
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
 import { ToastProvider } from './providers/toast.provider';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RoutesProvider } from './providers/routes.provider';
@@ -54,7 +55,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

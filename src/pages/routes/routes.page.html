@@ -19,4 +19,6 @@
     <button ion-fab (click)="navToAddRoute()" color="primary"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 
+  <routes-list (routeClick)="navToRouteDetail($event)"></routes-list>
+
 </ion-content>

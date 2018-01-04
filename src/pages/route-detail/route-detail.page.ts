@@ -21,8 +21,9 @@ export class RouteDetailPage {
   constructor(public navParams: NavParams, private navController: NavController) {
     this.route = this.navParams.get("route") as RouteModel;
     if (this.route) {
-      //si recibimos route por paramtros estamos en edicion
-      this.mode = "edit";
+      //si recibimos route por paramtros estamos en edicion o en modo vista
+      this.mode = "view";
+      this.mode = this.navParams.get("mode")
     } else {
       //si no recibimos route por paramtros estamos en nuevo por lo que creamos un nuevo objeto
       this.mode = "add"
@@ -32,9 +33,14 @@ export class RouteDetailPage {
 
   navToBack() {
     this.navController.pop();
-
   }
 
+  setModeRouteEdit() {
+    this.mode = "edit"
+  }
+  navToAddRoute() {
+    this.navController.push(RouteDetailPage, {})
+  }
 
 
 }

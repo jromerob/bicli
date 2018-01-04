@@ -6,7 +6,7 @@ export class RouteModel {
   geometries: any;
   distance: string = "";
   level: number = 0; //categoria de 1 a 10
-  category: string = ""
+  categoryId: string = ""
   userId: string = ""; //autor de la ruta
   clubId: string = ""; //club creador de la ruta
   likes: number = 0;

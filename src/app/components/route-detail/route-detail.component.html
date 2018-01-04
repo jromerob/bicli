@@ -1,60 +1,125 @@
-<ion-card no-padding>
-  <ion-avatar *ngIf="route.image!=''">
-    <img [src]="route.image">
-  </ion-avatar>
-  <h2 text-center>  {{route.name}} </h2>
-</ion-card>
-<form #formRoute="ngForm">
-  <ion-list>
-    <ion-item>
-      <ion-label>Club</ion-label>
-      <ion-select [(ngModel)]="route.clubId" name="clubId">
-        <ion-option *ngFor="let userClub of userClubs " [value]="userClub?.id">{{userClub?.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <!-- <ion-item>
-      <ion-label floating>Club</ion-label>
-      <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item> -->
-    <ion-item>
-      <ion-label floating>Nombre</ion-label>
-      <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Recorrido</ion-label>
-      <ion-input [(ngModel)]="route.route" name="route" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Distancia</ion-label>
-      <ion-input [(ngModel)]="route.distance" name="distance" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label stacked>Nivel {{route.level}}</ion-label>
-      <ion-range no-padding pin="true" min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
-        <ion-icon small range-left name="battery-dead"></ion-icon>
-        <ion-icon range-right name="battery-charging"></ion-icon>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-label>Tipo de Ruta</ion-label>
-      <ion-select [(ngModel)]="route.category" name="category">
-        <ion-option *ngFor="let routeCategory of routeCategories " [value]="routeCategory.id">{{routeCategory.category}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Observaciones</ion-label>
-      <ion-input [(ngModel)]="route.observations" name="observations" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-  </ion-list>
-  <button ion-button type="submit" color="primary" [disabled]="!formRoute.valid" [hidden]="formRoute.pristine" block (click)="update()" *ngIf="mode=='edit'">
+<ng-container *ngIf="mode=='add' || mode=='edit'">
+  <ion-card no-padding>
+    <ion-avatar *ngIf="route.image!=''">
+      <img [src]="route.image">
+    </ion-avatar>
+    <h2 text-center>  {{route.name}} </h2>
+  </ion-card>
+  <form #formRoute="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Club</ion-label>
+        <ion-select [(ngModel)]="route.clubId" name="clubId">
+          <ion-option *ngFor="let userClub of userClubs " [value]="userClub?.id">{{userClub?.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo de Ruta</ion-label>
+        <ion-select [(ngModel)]="route.categoryId" name="categoryId">
+          <ion-option *ngFor="let routeCategory of routeCategories " [value]="routeCategory.id">{{routeCategory.category}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="off" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Recorrido</ion-label>
+        <ion-textarea [(ngModel)]="route.route" name="route" type="text" autocapitalize="off" required>
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-grid item-content no-padding>
+          <ion-row>
+            <ion-col col-4>
+              <ion-label floating>Distancia (Km.)</ion-label>
+              <ion-input [(ngModel)]="route.distance" name="distance" type="text" autocapitalize="off" required>
+              </ion-input>
+            </ion-col>
+            <ion-col col-8>
+              <ion-label stacked>Nivel de esfuerzo {{route.level}}</ion-label>
+              <ion-range no-padding pin="true" min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
+                <ion-icon small range-left name="pulse"></ion-icon>
+                <ion-icon range-right name="pulse"></ion-icon>
+              </ion-range>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Observaciones</ion-label>
+        <ion-textarea [(ngModel)]="route.observations" name="observations" type="text" autocapitalize="off" required>
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <button ion-button type="submit" color="primary" [disabled]="!formRoute.valid" [hidden]="formRoute.pristine" block (click)="update()" *ngIf="mode=='edit'">
     Guardar
   </button>
-  <button ion-button type="submit" color="primary" block (click)="add()" *ngIf="mode=='add'">
+    <button ion-button type="submit" color="primary" block (click)="add()" *ngIf="mode=='add'">
     Nueva
     </button>
-</form>
+  </form>
+</ng-container>
+
+
+<ng-container *ngIf="mode=='view'">
+  <agm-map [latitude]="lat" [longitude]="lon">
+    <agm-marker [latitude]="lat" [longitude]="lon"></agm-marker>
+    <agm-circle [latitude]="lat" [longitude]="lon" [radius]="40000"></agm-circle>
+  </agm-map>
+
+  <ion-card>
+    <ion-card-header>
+      <h1>{{routeCategoryDescription}}</h1>
+      <p>{{routeClubName}}</p>
+      <small>{{route.userId}}</small>
+
+    </ion-card-header>
+    <ion-card-content>
+
+      <!-- <img src="img/advance-card-map-madison.png"> -->
+      <!-- <ion-fab right top>
+        <button ion-fab>
+        <ion-icon name="pin"></ion-icon>
+      </button>
+      </ion-fab> -->
+
+      <ion-item>
+        <ion-icon name="map" item-left large></ion-icon>
+        <h2>Recorrido</h2>
+        <p text-wrap>{{route.route}}</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="speedometer" item-start large></ion-icon>
+        <h2>Distancia</h2>
+        <p>{{route.distance}} Km.</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="pulse" item-start large></ion-icon>
+        <h2>Nivel de esfuerzo</h2>
+        <p>{{route.level}}</p>
+      </ion-item>
+
+
+      <ion-item *ngIf="route.observations">
+        <p>{{route.observations}}</p>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-icon item-left name="thumbs-up" start (click)="like()" color="primary"></ion-icon>
+        <h2 item-left><strong color="secondary">{{route.likes}}</strong> Likes </h2>
+        <!-- <span item-left>18 min</span>
+        <span item-left>(2.6 mi)</span> -->
+        <button ion-button icon-left clear item-end (click)="navToProgramRoute()">
+        <ion-icon name="clock"></ion-icon>
+        Programar
+      </button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ng-container>

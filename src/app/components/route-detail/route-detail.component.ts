@@ -30,6 +30,13 @@ export class RouteDetailComponent implements OnInit, OnDestroy {
   routeObservableSuscription: Subscription;
   userClubs: any[];
   routeCategories = CONFIG_APP.routeCategories;
+  routeClubName: string = "";
+  routeAuthorName: string = "";
+  routeCategoryDescription: string = "";
+
+  lat: number = 39.458441;
+  lon: number = -5.876757;
+
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -48,14 +55,13 @@ export class RouteDetailComponent implements OnInit, OnDestroy {
    * cambios a la propiedad route del componente
    */
   ngOnInit() {
-    //      this.route && (this.route.logo == "") ? this.route.logo = CONFIG_APP.images.defaultRouteLogo : this.route.logo = this.route.logo;
-
-    if (this.mode == "edit") {
+    if (this.mode != "add") {
       this.routeObservable = this.routesProvider.get(this.route.id);
       this.routeObservableSuscription = this.routeObservable.subscribe(
         route => {
           this.route = route
-          //          if (this.route.logo == "") this.route.logo = CONFIG_APP.images.defaultRouteLogo;
+          this.getClubName(route.clubId)
+          this.getRouteTypeDescription(route.categoryId)
         }
       )
 
@@ -87,6 +93,23 @@ export class RouteDetailComponent implements OnInit, OnDestroy {
         this.OnNewRoute.emit(this.route);
       })
 
+  }
+
+  like() {
+    this.routesProvider.like(this.route, this.profileProvider.profile.id);
+  }
+
+
+  navToProgramRoute() {
+    alert("Pte de implementar, programar esta ruta en una fecha")
+  }
+
+  private getClubName(ClubId) {
+    this.clubsProvider.get(ClubId).subscribe(club => this.routeClubName = club.name)
+  }
+
+  private getRouteTypeDescription(CategoyId) {
+    this.routeCategoryDescription = this.routesProvider.getRouteTypeDescription(CategoyId);
   }
 
 
