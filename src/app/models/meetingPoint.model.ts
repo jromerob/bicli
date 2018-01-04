@@ -2,7 +2,7 @@ import { CoordinatesModel } from './coordinates.model';
 
 export class MeetingPointModel {
   name: string = "";
-  adress: string = "";
+  address: string = "";
   coordinates: CoordinatesModel;
 
   constructor() {

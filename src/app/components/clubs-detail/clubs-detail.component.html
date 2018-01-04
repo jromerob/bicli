@@ -32,6 +32,24 @@
       <ion-input [(ngModel)]="club.town" name="town" type="text" autocapitalize="off" required>
       </ion-input>
     </ion-item>
+    <!-- <ion-item *ngIf="mode=='add'">
+      <ion-label floating>Puntos de encuentro</ion-label>
+      <ion-textarea text-wrap value="Podrás añadir puntos de encuentro tras crear el club" name="meetingPoints" type="text" autocapitalize="off" disabled>
+      </ion-textarea>
+    </ion-item> -->
+    <ion-item>
+      <ion-list no-padding no-margin>
+        <ion-list-header>
+          <ion-icon item-end name="add" (click)="navToAddMeetingPoint()"></ion-icon>
+          Puntos de encuentro
+        </ion-list-header>
+
+        <ion-item detail-push *ngFor="let meetingPoint of club.meetingPoints" (click)="navToEditMeetingPoint(meetingPoint)">
+          {{meetingPoint.name}}
+        </ion-item>
+      </ion-list>
+    </ion-item>
+
     <ion-item>
       <ion-label floating>Coordenadas </ion-label>
       <ion-input [(ngModel)]="club.coordinates" name="coordinates" type="text" autocapitalize="off" required>

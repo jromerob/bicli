@@ -7,6 +7,7 @@ import { RoutesListComponent } from './routes-list/routes-list.component';
 import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-subcribed';
 import { ClubsListComponent } from './clubs-list/clubs-list.component';
 import { ClubsDetailComponent } from './clubs-detail/clubs-detail.component';
+import { MeetingPointDetailComponent } from './meetingPoint-detail/meetingPoint-detail.component';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -16,7 +17,9 @@ import { AgmCoreModule } from '@agm/core';
     ProfileDetailComponent,
     ClubsListSubcribedComponent,
     ClubsListComponent,
-    ClubsDetailComponent],
+    ClubsDetailComponent,
+    MeetingPointDetailComponent
+  ],
   imports: [
     BrowserModule,
     IonicModule,
@@ -28,6 +31,8 @@ import { AgmCoreModule } from '@agm/core';
     RoutesListComponent,
     ClubsListSubcribedComponent,
     ClubsListComponent,
-    ClubsDetailComponent]
+    ClubsDetailComponent,
+    MeetingPointDetailComponent
+  ]
 })
 export class ComponentsModule { }

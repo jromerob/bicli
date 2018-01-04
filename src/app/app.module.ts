@@ -18,6 +18,7 @@ import { LoginPage } from '../pages/login/login.page';
 import { ProfilePage } from '../pages/profile/profile.page';
 import { ClubsPage } from '../pages/clubs/clubs.page';
 import { ClubDetailPage } from '../pages/club-detail/club-detail.page';
+import { MeetingPointDetailPage } from '../pages/meetingPoint-detail/meeting-point-detail.page';
 
 import { AuthProvider } from './providers/auth.provider';
 import { ProfileProvider } from './providers/profile.provider';
@@ -46,7 +47,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     RoutesPage,
-    RouteDetailPage
+    RouteDetailPage,
+    MeetingPointDetailPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     RoutesPage,
-    RouteDetailPage
+    RouteDetailPage,
+    MeetingPointDetailPage
   ],
   providers: [
     StatusBar,
