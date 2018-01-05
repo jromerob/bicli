@@ -33,9 +33,8 @@ export class RouteDetailComponent implements OnInit, OnDestroy {
   routeClubName: string = "";
   routeAuthorName: string = "";
   routeCategoryDescription: string = "";
+  activeMap: boolean;
 
-  lat: number = 39.458441;
-  lon: number = -5.876757;
 
 
 
@@ -110,6 +109,11 @@ export class RouteDetailComponent implements OnInit, OnDestroy {
 
   private getRouteTypeDescription(CategoyId) {
     this.routeCategoryDescription = this.routesProvider.getRouteTypeDescription(CategoyId);
+  }
+
+  private updateCoordinatesFromMap(mapCoordinates: any) {
+    if (this.activeMap) this.route.centerCoordinates = { lat: mapCoordinates.lat, lon: mapCoordinates.lng }
+
   }
 
 

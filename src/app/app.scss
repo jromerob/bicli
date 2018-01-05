@@ -17,6 +17,7 @@ ion-select {
   max-width: 70%;
 }
 
+.route-title,
 ion-card-header {
   border-bottom: 2px solid map-get($colors, primary);
   margin-bottom: 2ex;
@@ -32,4 +33,18 @@ agm-map {
   background-color: map-get($colors, primary);
   margin-top: 2rem;
   padding-left: 16px;
+}
+
+.distance {
+  input,
+  p {
+    font-size: 200%;
+  }
+}
+
+.level {
+  input,
+  p {
+    font-size: 200%;
+  }
 }

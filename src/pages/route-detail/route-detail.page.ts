@@ -38,6 +38,7 @@ export class RouteDetailPage {
   setModeRouteEdit() {
     this.mode = "edit"
   }
+
   navToAddRoute() {
     this.navController.push(RouteDetailPage, {})
   }

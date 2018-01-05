@@ -1,6 +1,7 @@
+import { CoordinatesModel } from './coordinates.model';
+
 export class RouteModel {
   id?: string;
-  image: string = "";
   name: string = "";
   route: string = ""; //lugares de paso
   geometries: any;
@@ -11,9 +12,10 @@ export class RouteModel {
   clubId: string = ""; //club creador de la ruta
   likes: number = 0;
   observations: string = "";
+  centerCoordinates: CoordinatesModel; //coodenadas del punto central de la ruta
 
   constructor() {
-
+    this.centerCoordinates = new CoordinatesModel();
   }
 
 

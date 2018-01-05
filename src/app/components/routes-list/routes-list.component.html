@@ -3,10 +3,10 @@
   <ion-item *ngFor="let route of routes|async" detail-push (click)="emitRouteClick(route)" no-padding>
     <ion-grid>
       <ion-row>
-        <ion-col col-2 text-center>
-          <h2>{{route.distance}}</h2>
+        <ion-col col-3 text-center class="distance">
+          <p>{{route.distance}}</p>
         </ion-col>
-        <ion-col col-10>
+        <ion-col col-9>
           <strong>{{getRouteTypeDescription(route.categoryId)}}</strong><br> {{route.route}}
         </ion-col>
       </ion-row>

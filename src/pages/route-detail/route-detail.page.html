@@ -9,21 +9,28 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end *ngIf="mode!='add'">
+      <button ion-button icon-only (click)="navToAddRoute()">
+        <ion-icon name="add" ></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="setModeRouteEdit()" *ngIf="mode!='edit'">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+
     <ion-title>Detalle Rutas</ion-title>
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content>
-  <route-detail [route]="route" [mode]="mode" (OnNewRoute)="navToBack()" (OnUpdateRoute)="navToBack()"></route-detail>
-  <ion-fab bottom right>
-    <button ion-fab (click)="navToAddRoute()" color="primary"><ion-icon name=""></ion-icon></button>
-  </ion-fab>
-  <ion-fab right bottom>
-    <button ion-fab color="primary"><ion-icon name="arrow-dropleft"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab color="secondary" (click)="navToAddRoute()"><ion-icon name="add" ></ion-icon></button>
-      <button ion-fab color="secondary" (click)="setModeRouteEdit()"><ion-icon name="create"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col col-12 offset-md-3 col-md-6>
+        <route-detail [route]="route" [mode]="mode" (OnNewRoute)="navToBack()" (OnUpdateRoute)="navToBack()"></route-detail>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
