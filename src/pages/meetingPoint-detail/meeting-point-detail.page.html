@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Punto de encuentro</ion-title>
+    <ion-title>{{club.name}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col col-12 offset-md-3 col-md-6>
-        <ion-title>Punto de encuentro {{club.name}}</ion-title>
+        <h2 text-wrap>Punto de encuentro {{meetingPoint.name}}</h2>
         <meetingPoint-detail [club]="club" [meetingPoint]="meetingPoint"></meetingPoint-detail>
       </ion-col>
     </ion-row>

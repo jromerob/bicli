@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { ClubModel, MeetingPointModel } from '../../app/models';
-import { ClubsProvider } from '../../app/providers/clubs.provider';
-import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ClubsPage page.

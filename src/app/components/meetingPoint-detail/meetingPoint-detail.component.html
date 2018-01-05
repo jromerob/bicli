@@ -1,35 +1,46 @@
-<agm-map [latitude]="meetingPoint.coordinates.lat" [longitude]="meetingPoint.coordinates.lon">
+<agm-map [latitude]="meetingPoint.coordinates.lat" [longitude]="meetingPoint.coordinates.lon" (centerChange)="updateCoordinatesFromMap($event)">
   <agm-marker [latitude]="meetingPoint.coordinates.lat" [longitude]="meetingPoint.coordinates.lon"></agm-marker>
 </agm-map>
 
-<ion-card no-padding>
-  <form #formMeetingPoint="ngForm">
-    <ion-item>
-      <ion-icon name="speedometer" item-start large></ion-icon>
-      <ion-label floating>Nombre del punto</ion-label>
-      <ion-input [(ngModel)]="meetingPoint.name" name="name" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="speedometer" item-start large></ion-icon>
-      <ion-label floating>Dirección</ion-label>
-      <ion-input [(ngModel)]="meetingPoint.address" name="address" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="speedometer" item-start large></ion-icon>
-      <ion-label floating>Latitud</ion-label>
-      <ion-input [(ngModel)]="meetingPoint.coordinates.lat" name="lat" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="speedometer" item-start large></ion-icon>
-      <ion-label floating>Longitud</ion-label>
-      <ion-input [(ngModel)]="meetingPoint.coordinates.lon" name="lon" type="text" autocapitalize="off" required>
-      </ion-input>
-    </ion-item>
-    <button ion-button type="submit" color="primary" [disabled]="!formMeetingPoint.valid" [hidden]="formMeetingPoint.pristine" block (click)="update()">
-    Guardar {{formMeetingPoint.valid}} {{formMeetingPoint.pristine}}
+
+<form #formMeetingPoint="ngForm">
+  <ion-item>
+    <ion-label stacked color="primary">NOMBRE DEL PUNTO DE ENCUENTRO</ion-label>
+    <ion-input ion-title [(ngModel)]="meetingPoint.name" name="name" type="text" autocapitalize="true" required>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="locate" item-start large></ion-icon>
+    <ion-label floating>Dirección</ion-label>
+    <ion-input [(ngModel)]="meetingPoint.address" name="address" type="text" autocapitalize="off" required>
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-icon name="pin" item-start large></ion-icon>
+    <ion-grid item-content>
+      <ion-row>
+        <ion-col>
+          <ion-label floating>Latitud</ion-label>
+          <ion-input [(ngModel)]="meetingPoint.coordinates.lat" name="lat" type="text" autocapitalize="off" required>
+          </ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label floating>Longitud</ion-label>
+          <ion-input [(ngModel)]="meetingPoint.coordinates.lon" name="lon" type="text" autocapitalize="off" required>
+          </ion-input>
+        </ion-col>
+        <ion-col col-9>
+          <p text-wrap>Actualizar las coordenadas al mover el mapa.</p>
+        </ion-col>
+        <ion-col col-3>
+          <ion-toggle [(ngModel)]="activeMap" name="activeMap"></ion-toggle>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-item>
+  <button ion-button type="submit" color="primary" [disabled]="!formMeetingPoint.valid" [hidden]="formMeetingPoint.pristine" block (click)="update()">
+    Guardar
   </button>
-  </form>
-</ion-card>
+</form>

@@ -25,3 +25,11 @@ ion-card-header {
 agm-map {
   height: 300px;
 }
+
+.item.item-divider-md {
+  text-transform: uppercase;
+  color: white;
+  background-color: map-get($colors, primary);
+  margin-top: 2rem;
+  padding-left: 16px;
+}

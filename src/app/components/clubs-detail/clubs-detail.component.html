@@ -1,11 +1,14 @@
-<ion-card no-padding>
+<ion-card no-padding no-margin>
   <ion-avatar>
     <img [src]="club.logo">
   </ion-avatar>
   <h2 text-center>  {{club.name}} </h2>
 </ion-card>
 <form #formClub="ngForm">
-  <ion-list>
+  <ion-item-group>
+    <ion-item-divider color="light">
+      Datos del club
+    </ion-item-divider>
 
     <ion-item>
       <ion-label floating>Nombre</ion-label>
@@ -38,24 +41,25 @@
       </ion-textarea>
     </ion-item> -->
     <ion-item>
-      <ion-list no-padding no-margin>
-        <ion-list-header>
-          <ion-icon item-end name="add" (click)="navToAddMeetingPoint()"></ion-icon>
-          Puntos de encuentro
-        </ion-list-header>
-
-        <ion-item detail-push *ngFor="let meetingPoint of club.meetingPoints" (click)="navToEditMeetingPoint(meetingPoint)">
-          {{meetingPoint.name}}
-        </ion-item>
-      </ion-list>
-    </ion-item>
-
-    <ion-item>
       <ion-label floating>Coordenadas </ion-label>
       <ion-input [(ngModel)]="club.coordinates" name="coordinates" type="text" autocapitalize="off" required>
       </ion-input>
     </ion-item>
-  </ion-list>
+  </ion-item-group>
+  <ion-item-group>
+    <!-- <ion-item class="sublist1"> -->
+    <ion-item-divider color="light">
+      <ion-icon item-start name="locate"></ion-icon>
+      <ion-icon item-end name="add" (click)="navToAddMeetingPoint()"></ion-icon>
+      Puntos de encuentro
+    </ion-item-divider>
+
+    <ion-item detail-push *ngFor="let meetingPoint of club.meetingPoints" (click)="navToEditMeetingPoint(meetingPoint)">
+      {{meetingPoint.name}}
+    </ion-item>
+    <!-- </ion-item> -->
+  </ion-item-group>
+
   <button ion-button type="submit" color="primary" [disabled]="!formClub.valid" [hidden]="formClub.pristine" block (click)="update()" *ngIf="mode=='edit'">
     Guardar
   </button>
