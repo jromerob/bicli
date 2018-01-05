@@ -15,9 +15,14 @@
   <form #formRoute="ngForm">
     <ion-list>
       <ion-item>
-        <ion-icon name="pin" item-start large></ion-icon>
-        <ion-grid item-content>
+        <ion-grid item-content no-padding>
           <ion-row>
+            <ion-col col-9>
+              <p text-wrap>Actualizar las coordenadas al mover el mapa.</p>
+            </ion-col>
+            <ion-col col-3>
+              <ion-toggle [(ngModel)]="activeMap" name="activeMap"></ion-toggle>
+            </ion-col>
             <ion-col>
               <ion-label floating>Latitud</ion-label>
               <ion-input [(ngModel)]="route.centerCoordinates.lat" name="lat" type="text" autocapitalize="off" required>
@@ -28,12 +33,7 @@
               <ion-input [(ngModel)]="route.centerCoordinates.lon" name="lon" type="text" autocapitalize="off" required>
               </ion-input>
             </ion-col>
-            <ion-col col-9>
-              <p text-wrap>Actualizar las coordenadas al mover el mapa.</p>
-            </ion-col>
-            <ion-col col-3>
-              <ion-toggle [(ngModel)]="activeMap" name="activeMap"></ion-toggle>
-            </ion-col>
+
           </ion-row>
         </ion-grid>
       </ion-item>
@@ -62,18 +62,23 @@
       <ion-item>
         <ion-grid item-content no-padding>
           <ion-row>
-            <ion-col col-5>
+            <ion-col col-4>
               <ion-label floating>Distancia (Km.)</ion-label>
               <ion-input class="distance" [(ngModel)]="route.distance" name="distance" type="text" autocapitalize="off" required>
               </ion-input>
             </ion-col>
-            <ion-col col-7>
-              <ion-label stacked>Nivel de esfuerzo {{route.level}}</ion-label>
-              <ion-range no-padding pin="true" min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
+            <ion-col col-8 class="level">
+              <ion-label stacked>Nivel de esfuerzo
+                <ion-badge float-right no-margin item-end color="primary">{{route.level}}</ion-badge>
+              </ion-label>
+              <ion-range range-right no-padding min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
                 <ion-icon small range-left name="pulse"></ion-icon>
                 <ion-icon range-right name="pulse"></ion-icon>
+                <ion-label range-left>0</ion-label>
+                <ion-label range-right>10</ion-label>
               </ion-range>
             </ion-col>
+
           </ion-row>
         </ion-grid>
       </ion-item>

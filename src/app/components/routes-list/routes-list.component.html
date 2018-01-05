@@ -1,6 +1,6 @@
 <ion-list *ngIf="routes;else spinner" no-padding no-margin>
 
-  <ion-item *ngFor="let route of routes|async" detail-push (click)="emitRouteClick(route)" no-padding>
+  <!-- <ion-item *ngFor="let route of routes|async" detail-push (click)="emitRouteClick(route)" no-padding>
     <ion-grid>
       <ion-row>
         <ion-col col-3 text-center class="distance">
@@ -11,6 +11,13 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+  </ion-item> -->
+
+  <ion-item class="route-item" *ngFor="let route of routes|async" detail-push (click)="emitRouteClick(route)" no-padding no-margin>
+    <p class="distance">{{route.distance}}<small>km</small></p>
+    <div class="route">
+      <strong>{{getRouteTypeDescription(route.categoryId)}}</strong><br> {{route.route}}
+    </div>
   </ion-item>
 
 </ion-list>

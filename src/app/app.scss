@@ -34,11 +34,35 @@ agm-map {
   margin-top: 2rem;
   padding-left: 16px;
 }
+// Campos de distancia
+
+.route-item {
+  .distance {
+    text-align: center;
+    font-size: 3rem;
+    min-width: 7rem;
+    color: white;
+    background-color: map-get($colors, primary);
+    margin: 0 !important;
+    padding: 9px 0;
+    float: left;
+    margin-right: 0.3ex !important;
+
+    small {
+      font-size: 1rem;
+    }
+  }
+
+  .route {
+    padding: 9px 0;
+  }
+}
 
 .distance {
   input,
   p {
     font-size: 200%;
+    min-width: 5rem;
   }
 }
 
@@ -47,4 +71,8 @@ agm-map {
   p {
     font-size: 200%;
   }
+}
+
+ion-label.label.label-md {
+  margin: 0;
 }
