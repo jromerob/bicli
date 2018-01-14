@@ -21,13 +21,6 @@ export class ClubsProvider {
     this.clubsCollection = this.angularFirestore.collection('clubs');
     this.clubs = this.clubsCollection.valueChanges();
 
-    // this.clubs = this.clubsCollection.snapshotChanges().map(actions => {
-    //   return actions.map(a => {
-    //     const data = a.payload.doc.data() as ClubModel;
-    //     const id = a.payload.doc.id;
-    //     return { id, ...data };
-    //   });
-    // });
   }
 
 
@@ -92,6 +85,11 @@ export class ClubsProvider {
   get(id): Observable<ClubModel> {
     this.clubDocRef = this.angularFirestore.doc<ClubModel>(`clubs/${id}`);
     return this.clubDocRef.valueChanges();
+  };
+
+  getByAdmin(userId): Observable<ClubModel[]> {
+    return this.angularFirestore.collection<ClubModel>('clubs', ref => ref.where('admin', '==', userId))
+      .valueChanges();
   };
 
 

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ClubModel } from '../../models';
+import { ClubModel, MeetingPointModel } from '../../models';
 import { CONFIG_APP } from '../../constants/config-app.constant';
 import { ClubsProvider } from '../../providers/clubs.provider';
 import { ProfileProvider } from '../../providers/profile.provider';
 import { ToastProvider } from '../../providers/toast.provider';
+import { MeetingPointDetailPage } from '../../../pages/meetingPoint-detail/meeting-point-detail.page';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -37,9 +38,6 @@ export class ClubsDetailComponent implements OnInit, OnDestroy {
    * cambios a la propiedad club del componente
    */
   ngOnInit() {
-    // if (this.club) {
-    //   if (this.club.logo == "") this.club.logo = CONFIG_APP.images.defaultClubLogo;
-    // }
     this.club && (this.club.logo == "") ? this.club.logo = CONFIG_APP.images.defaultClubLogo : this.club.logo = this.club.logo;
 
     if (this.mode == "edit") {
@@ -76,6 +74,14 @@ export class ClubsDetailComponent implements OnInit, OnDestroy {
         this.OnNewClub.emit(this.club);
       })
 
+  }
+
+  navToEditMeetingPoint(meetingPoint: MeetingPointModel) {
+    this.navCtrl.push(MeetingPointDetailPage, { club: this.club, meetingPoint: meetingPoint })
+  }
+
+  navToAddMeetingPoint() {
+    this.navCtrl.push(MeetingPointDetailPage, { club: this.club })
   }
 
 

@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,67 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-select {
+  max-width: 70%;
+}
+
+.route-title,
+ion-card-header {
+  border-bottom: 2px solid map-get($colors, primary);
+  margin-bottom: 2ex;
+}
+
+agm-map {
+  height: 300px;
+}
+
+.item.item-divider-md {
+  text-transform: uppercase;
+  color: white;
+  background-color: map-get($colors, primary);
+  margin-top: 2rem;
+  padding-left: 16px;
+}
+// Campos de distancia
+
+.route-item {
+  .distance {
+    text-align: center;
+    font-size: 3rem;
+    min-width: 7rem;
+    color: white;
+    background-color: map-get($colors, primary);
+    margin: 0 !important;
+    padding: 9px 0;
+    float: left;
+    margin-right: 0.3ex !important;
+
+    small {
+      font-size: 1rem;
+    }
+  }
+
+  .route {
+    padding: 9px 0;
+  }
+}
+
+.distance {
+  input,
+  p {
+    font-size: 200%;
+    min-width: 5rem;
+  }
+}
+
+.level {
+  input,
+  p {
+    font-size: 200%;
+  }
+}
+
+ion-label.label.label-md {
+  margin: 0;
+}

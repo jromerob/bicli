@@ -1,0 +1,175 @@
+<ng-container *ngIf="mode=='add' || mode=='edit'">
+
+  <agm-map [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon" (centerChange)="updateCoordinatesFromMap($event)">
+    <agm-marker [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon"></agm-marker>
+    <agm-circle [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon" [radius]="40000"></agm-circle>
+  </agm-map>
+
+  <ion-item class="route-title">
+    <h1>{{route.name}}</h1>
+    <p>{{routeClubName}}</p>
+    <small>{{route.userId}}</small>
+  </ion-item>
+
+
+  <form #formRoute="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-grid item-content no-padding>
+          <ion-row>
+            <ion-col col-9>
+              <p text-wrap>Actualizar las coordenadas al mover el mapa.</p>
+            </ion-col>
+            <ion-col col-3>
+              <ion-toggle [(ngModel)]="activeMap" name="activeMap"></ion-toggle>
+            </ion-col>
+            <ion-col>
+              <ion-label floating>Latitud</ion-label>
+              <ion-input [(ngModel)]="route.centerCoordinates.lat" name="lat" type="text" autocapitalize="off" required>
+              </ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label floating>Longitud</ion-label>
+              <ion-input [(ngModel)]="route.centerCoordinates.lon" name="lon" type="text" autocapitalize="off" required>
+              </ion-input>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item>
+        <ion-label>Club</ion-label>
+        <ion-select [(ngModel)]="route.clubId" name="clubId">
+          <ion-option *ngFor="let userClub of userClubs " [value]="userClub?.id">{{userClub?.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo de Ruta</ion-label>
+        <ion-select [(ngModel)]="route.categoryId" name="categoryId">
+          <ion-option *ngFor="let routeCategory of routeCategories " [value]="routeCategory.id">{{routeCategory.category}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nombre</ion-label>
+        <ion-input [(ngModel)]="route.name" name="name" type="text" autocapitalize="true" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Recorrido</ion-label>
+        <ion-textarea [(ngModel)]="route.route" name="route" type="text" autocapitalize="true" required>
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-grid item-content no-padding>
+          <ion-row>
+            <ion-col col-4>
+              <ion-label floating>Distancia (Km.)</ion-label>
+              <ion-input class="distance" [(ngModel)]="route.distance" name="distance" type="text" autocapitalize="off" required>
+              </ion-input>
+            </ion-col>
+            <ion-col col-8 class="level">
+              <ion-label stacked>Nivel de esfuerzo
+                <ion-badge float-right no-margin item-end color="primary">{{route.level}}</ion-badge>
+              </ion-label>
+              <ion-range range-right no-padding min="1" max="10" step="1" [(ngModel)]="route.level" name="level" snaps="true" color="secondary">
+                <ion-icon small range-left name="pulse"></ion-icon>
+                <ion-icon range-right name="pulse"></ion-icon>
+                <ion-label range-left>0</ion-label>
+                <ion-label range-right>10</ion-label>
+              </ion-range>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Observaciones</ion-label>
+        <ion-textarea [(ngModel)]="route.observations" name="observations" type="text" autocapitalize="off">
+        </ion-textarea>
+      </ion-item>
+      <button ion-button type="submit" color="primary" [disabled]="!formRoute.valid" [hidden]="formRoute.pristine" block (click)="update()" *ngIf="mode=='edit'">
+      Guardar
+    </button>
+      <button ion-button type="submit" color="primary" block (click)="add()" *ngIf="mode=='add'">
+      Nueva
+      </button>
+    </ion-list>
+
+  </form>
+</ng-container>
+
+
+<ng-container *ngIf="mode=='view'">
+
+
+  <!-- <ion-card no-padding> -->
+  <agm-map [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon">
+    <agm-marker [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon"></agm-marker>
+    <agm-circle [latitude]="route.centerCoordinates.lat" [longitude]="route.centerCoordinates.lon" [radius]="40000"></agm-circle>
+  </agm-map>
+
+  <!-- <ion-card-header> -->
+  <ion-item class="route-title">
+    <h1>{{routeCategoryDescription}}</h1>
+    <p>{{routeClubName}}</p>
+    <small>{{route.userId}}</small>
+  </ion-item>
+
+  <!-- <ion-item>
+    <ion-icon name="pin" item-start large></ion-icon>
+    <ion-grid item-content>
+      <ion-row>
+        <ion-col>
+          <ion-label floating>Latitud</ion-label>
+          <ion-input [(ngModel)]="route.centerCoordinates.lat" name="lat" type="text" autocapitalize="off" required>
+          </ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label floating>Longitud</ion-label>
+          <ion-input [(ngModel)]="route.centerCoordinates.lon" name="lon" type="text" autocapitalize="off" required>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item> -->
+
+  <ion-item>
+    <ion-icon name="map" item-left large></ion-icon>
+    <h2>Recorrido</h2>
+    <p text-wrap>{{route.route}}</p>
+  </ion-item>
+
+  <ion-item class="distance">
+    <ion-icon name="speedometer" item-start large></ion-icon>
+    <h2>Distancia</h2>
+    <p>{{route.distance}} Km.</p>
+  </ion-item>
+
+  <ion-item class="level">
+    <ion-icon name="pulse" item-start large></ion-icon>
+    <h2>Nivel de esfuerzo</h2>
+    <p>{{route.level}}</p>
+  </ion-item>
+
+
+  <ion-item *ngIf="route.observations">
+    <ion-icon name="text" item-start large></ion-icon>
+    <h2>Observaciones</h2>
+    <p>{{route.observations}}</p>
+  </ion-item>
+
+
+  <ion-item no-lines>
+    <ion-icon item-left name="thumbs-up" start (click)="like()" color="primary"></ion-icon>
+    <h2 item-left><strong color="secondary">{{route.likes}}</strong> Likes </h2>
+    <!-- <span item-left>18 min</span>
+        <span item-left>(2.6 mi)</span> -->
+    <button ion-button icon-left clear item-end (click)="navToProgramRoute()">
+        <ion-icon name="clock"></ion-icon>
+        Programar
+      </button>
+  </ion-item>
+  <!-- </ion-card-content>
+  </ion-card> -->
+</ng-container>

@@ -65,7 +65,6 @@ export class ProfileProvider {
     //https://stackoverflow.com/questions/37300338/how-can-i-convert-a-typescript-object-to-a-plain-object
     let profileObj = Object.assign({}, this.profile)
     return this.profileCollection.doc(uid).set(profileObj)
-
   }
 
 }

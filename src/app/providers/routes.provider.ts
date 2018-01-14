@@ -1,5 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { RouteModel } from '../models/route.model';
+import { CONFIG_APP } from '../constants/config-app.constant';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the RoutesProvider provider.
@@ -10,8 +13,62 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RoutesProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello RoutesProvider Provider');
+
+
+  /*
+    Generated class for the ClubsProvider provider.
+
+    See https://angular.io/guide/dependency-injection for more info on providers
+    and Angular DI.
+  */
+  public routes: Observable<RouteModel[]>;
+  private routesCollection: AngularFirestoreCollection<RouteModel>;
+  private routeDocRef: AngularFirestoreDocument<RouteModel>;
+
+
+  constructor(private angularFirestore: AngularFirestore) {
+    //
+    this.routesCollection = this.angularFirestore.collection('routes');
+    this.routes = this.routesCollection.valueChanges();
+
   }
+
+
+  addRoute(route: RouteModel, userUID: string): Promise<void> {
+    // Persist a document id
+    route.id = this.angularFirestore.createId();
+    //asignamos el usuario creador
+    route.userId = userUID;
+    //
+    let routeObj = Object.assign({}, route)
+    return this.routesCollection.doc(route.id).set(routeObj)
+
+  }
+
+  update(route: RouteModel): Promise<void> {
+    return this.routeDocRef.update(route);
+  }
+
+  like(route: RouteModel, userId: string): Promise<void> {
+    route.likes++;
+    return this.update(route)
+  }
+
+  get(id): Observable<RouteModel> {
+    this.routeDocRef = this.angularFirestore.doc<RouteModel>(`routes/${id}`);
+    return this.routeDocRef.valueChanges();
+  };
+
+  getRouteTypeDescription(routeTypeId: number): string {
+
+    let descIndex = CONFIG_APP.routeCategories.find(
+      item => {
+        return item.id == routeTypeId;
+      });
+    return descIndex.category;
+
+
+  }
+
 
 }
