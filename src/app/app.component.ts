@@ -21,18 +21,18 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any, ionic_icon: string }>;
+  pages: Array<{ title: string, component: any, ionic_icon: string, color: string }>;
 
   constructor(private profileProvider: ProfileProvider, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private authProvider: AuthProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inicio', component: HomePage, ionic_icon: "ios-home-outline" },
-      { title: 'Planificación', component: PlansPage, ionic_icon: "ios-calendar-outline" },
-      { title: 'Rutas', component: RoutesPage, ionic_icon: "ios-bicycle-outline" },
-      { title: 'Clubs/Grupos', component: ClubsPage, ionic_icon: "ios-people-outline" },
-      { title: 'Mi perfil', component: ProfilePage, ionic_icon: "ios-contact-outline" }
+      { title: 'Inicio', component: HomePage, ionic_icon: "ios-home-outline", color: "primary" },
+      { title: 'Planificación', component: PlansPage, ionic_icon: "ios-calendar-outline", color: "secondary" },
+      { title: 'Rutas', component: RoutesPage, ionic_icon: "ios-bicycle-outline", color: "tertiary" },
+      { title: 'Clubs/Grupos', component: ClubsPage, ionic_icon: "ios-people-outline", color: "quaternary" },
+      { title: 'Mi perfil', component: ProfilePage, ionic_icon: "ios-contact-outline", color: "quinary" }
     ];
 
   }
