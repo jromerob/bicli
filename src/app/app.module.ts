@@ -14,6 +14,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home.page';
 import { RoutesPage } from '../pages/routes/routes.page';
 import { RouteDetailPage } from '../pages/route-detail/route-detail.page';
+import { PlansPage } from '../pages/plans/plans.page';
+import { PlanDetailPage } from '../pages/plan-detail/plan-detail.page';
+
 import { LoginPage } from '../pages/login/login.page';
 import { ProfilePage } from '../pages/profile/profile.page';
 import { ClubsPage } from '../pages/clubs/clubs.page';
@@ -48,6 +51,8 @@ export const firebaseConfig = {
     LoginPage,
     RoutesPage,
     RouteDetailPage,
+    PlansPage,
+    PlanDetailPage,
     MeetingPointDetailPage
   ],
   imports: [
@@ -69,6 +74,8 @@ export const firebaseConfig = {
     LoginPage,
     RoutesPage,
     RouteDetailPage,
+    PlansPage,
+    PlanDetailPage,
     MeetingPointDetailPage
   ],
   providers: [

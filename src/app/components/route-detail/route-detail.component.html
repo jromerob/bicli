@@ -116,23 +116,11 @@
     <small>{{route.userId}}</small>
   </ion-item>
 
-  <!-- <ion-item>
-    <ion-icon name="pin" item-start large></ion-icon>
-    <ion-grid item-content>
-      <ion-row>
-        <ion-col>
-          <ion-label floating>Latitud</ion-label>
-          <ion-input [(ngModel)]="route.centerCoordinates.lat" name="lat" type="text" autocapitalize="off" required>
-          </ion-input>
-        </ion-col>
-        <ion-col>
-          <ion-label floating>Longitud</ion-label>
-          <ion-input [(ngModel)]="route.centerCoordinates.lon" name="lon" type="text" autocapitalize="off" required>
-          </ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-item> -->
+  <ion-item>
+    <div class="item-content">
+      <h1 text-wrap>{{route.name}}</h1>
+    </div>
+  </ion-item>
 
   <ion-item>
     <ion-icon name="map" item-left large></ion-icon>
