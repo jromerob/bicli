@@ -7,6 +7,7 @@ import { RoutesListComponent } from './routes-list/routes-list.component';
 import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-subcribed';
 import { ClubsListComponent } from './clubs-list/clubs-list.component';
 import { ClubsDetailComponent } from './clubs-detail/clubs-detail.component';
+import { PlansListComponent } from './plans-list/plans-list.component';
 import { MeetingPointDetailComponent } from './meetingPoint-detail/meetingPoint-detail.component';
 import { AgmCoreModule } from '@agm/core';
 
@@ -18,6 +19,7 @@ import { AgmCoreModule } from '@agm/core';
     ClubsListSubcribedComponent,
     ClubsListComponent,
     ClubsDetailComponent,
+    PlansListComponent,
     MeetingPointDetailComponent
   ],
   imports: [
@@ -32,6 +34,7 @@ import { AgmCoreModule } from '@agm/core';
     ClubsListSubcribedComponent,
     ClubsListComponent,
     ClubsDetailComponent,
+    PlansListComponent,
     MeetingPointDetailComponent
   ]
 })

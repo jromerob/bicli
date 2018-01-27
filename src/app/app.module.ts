@@ -30,6 +30,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RoutesProvider } from './providers/routes.provider';
 import { ClubsProvider } from './providers/clubs.provider';
+import { PlansProvider } from './providers/plans.provider';
 
 
 export const firebaseConfig = {
@@ -86,6 +87,7 @@ export const firebaseConfig = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     RoutesProvider,
     ClubsProvider,
+    PlansProvider,
     ToastProvider
   ]
 })
