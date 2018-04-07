@@ -61,8 +61,6 @@ export class RoutesListComponent implements OnInit, OnDestroy {
 
     if (!this.filterByAdmin && !this.filterBySuscribed && !this.filterByNotSuscribed) return routes;
 
-
-
     if (this.filterBySuscribed) {
       routes.forEach(route => {
         if (this.isSuscribedTo(route)) returnRoutes.push(route)

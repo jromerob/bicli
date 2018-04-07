@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule } from 'ionic-angular';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { RouteDetailComponent } from './route-detail/route-detail.component';
+import { RouteCardComponent } from './route-card/route-card.component';
 import { RoutesListComponent } from './routes-list/routes-list.component';
 import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-subcribed';
 import { ClubsListComponent } from './clubs-list/clubs-list.component';
@@ -14,6 +15,7 @@ import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
     RouteDetailComponent,
+    RouteCardComponent,
     RoutesListComponent,
     ProfileDetailComponent,
     ClubsListSubcribedComponent,
@@ -30,6 +32,7 @@ import { AgmCoreModule } from '@agm/core';
   exports: [
     ProfileDetailComponent,
     RouteDetailComponent,
+    RouteCardComponent,
     RoutesListComponent,
     ClubsListSubcribedComponent,
     ClubsListComponent,

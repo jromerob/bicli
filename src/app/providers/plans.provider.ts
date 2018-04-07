@@ -32,9 +32,17 @@ export class PlansProvider {
 
   }
 
+
   update(plan: PlanModel): Promise<void> {
     return this.planDocRef.update(plan);
   }
+  /**
+   * Recupera todos los planes
+   */
+  getAll(): Observable<PlanModel> {
+    this.planDocRef = this.angularFirestore.doc<PlanModel>(`plans`);
+    return this.planDocRef.valueChanges();
+  };
 
   get(id): Observable<PlanModel> {
     this.planDocRef = this.angularFirestore.doc<PlanModel>(`plans/${id}`);

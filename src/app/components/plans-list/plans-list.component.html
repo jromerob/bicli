@@ -1,10 +1,22 @@
 <ion-list *ngIf="plans;else spinner" no-padding no-margin>
-  <h2>listado de rutas planificadas</h2>
-  <ion-item class="plan-item" *ngFor="let plan of plans | async" detail-push (click)="emitPlanClick(plan)" no-padding no-margin>
-    datos de la ruta planificada
-  </ion-item>
-
+  <div class="plan-item" *ngFor="let plan of plans | async" detail-push (click)="emitPlanClick(plan)" no-padding no-margin>
+    <div class="plan_date">
+      <div class="plan_weekday">
+        {{plan.time | date: "EEEE" }}
+      </div>
+      <div class="plan_day">
+        {{plan.time | date: "dd" }}
+      </div>
+      <div class="plan_month">
+        {{plan.time | date: "MMM"|lowercase }}
+      </div>
+    </div>
+    <div class="plan_card">
+      <route-card [routeId]="plan.id_ruta"></route-card>
+    </div>
+  </div>
 </ion-list>
+
 
 <ng-template #spinner>
   <ion-spinner></ion-spinner>

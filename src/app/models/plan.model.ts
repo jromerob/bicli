@@ -8,8 +8,8 @@ export class PlanModel {
   id_club: string;
   id_ruta: string;
   id_meeting_point: string;
-  Fecha: Date;
-  hora: Date;
+  time: Date;
+  //hora: Date;
 
   constructor() {
   }

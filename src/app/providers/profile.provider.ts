@@ -31,6 +31,13 @@ export class ProfileProvider {
       });
   }
 
+  get(uid: string): Observable<ProfileModel> {
+    this.profileDocRef = this.angularFirestore.doc<ProfileModel>(`profiles/${uid}`);
+    return this.profileDocRef.valueChanges();
+
+  }
+
+
   isSuscribedTo(ClubId: string): boolean {
     let found = this.profile.clubs.indexOf(ClubId) >= 0
     return found;

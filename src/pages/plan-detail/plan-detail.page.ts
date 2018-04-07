@@ -21,11 +21,11 @@ export class PlanDetailPage {
   constructor(public navParams: NavParams, private navController: NavController) {
     this.plan = this.navParams.get("route") as PlanModel;
     if (this.plan) {
-      //si recibimos route por paramtros estamos en edicion o en modo vista
+      //si recibimos plan por paramtros estamos en edicion o en modo vista
       this.mode = "view";
       this.mode = this.navParams.get("mode")
     } else {
-      //si no recibimos route por paramtros estamos en nuevo por lo que creamos un nuevo objeto
+      //si no recibimos plan por paramtros estamos en nuevo por lo que creamos un nuevo objeto
       this.mode = "add"
       this.plan = new PlanModel();
     }

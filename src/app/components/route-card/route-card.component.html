@@ -1,0 +1,23 @@
+<div>
+  <div class="routeCategory">
+    <p class="description">{{routeCategoryDescription}}</p>
+    <p class="club">{{routeClubShortName}}</p>
+  </div>
+
+
+  <p class="routeName">{{route?.name}}</p>
+  <p text-wrap class="route">{{route?.route}}</p>
+  <div class="routeData">
+    <div class="data">
+      <ion-icon name="speedometer" item-start large></ion-icon>
+      <small>{{route?.distance}} km.</small>
+    </div>
+    <div class="data">
+      <ion-icon name="pulse" item-start large></ion-icon>
+      <small>{{route?.level}}</small>
+    </div>
+    <div class="data">
+      <ion-icon name="thumbs-up"></ion-icon>
+      <small>{{route?.likes}} km.</small>
+    </div>
+  </div>

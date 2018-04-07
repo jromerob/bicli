@@ -1,0 +1,60 @@
+route-card {
+  width: 100%;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+  .routeCategory {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: flex-end;
+    .description {
+      flex: 0 0 auto;
+      align-self: auto;
+      font-weight: bold;
+    }
+    .club {
+      flex: 0 0 auto;
+      align-self: auto;
+      color: map-get($colors, "primary");
+      font-weight: bold;
+    }
+  }
+  .routeName {
+    padding-top: 0.5em;
+  }
+  .route {
+    font-size: 0.8em;
+    padding-bottom: 0.5em;
+    padding-top: 0.1em;
+    text-transform: uppercase;
+    color: map-get($colors, "secondary")
+  }
+  .routeData {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: flex-start;
+    padding-top: 0.5em;
+    div.data {
+      flex: 0 0 auto;
+      align-self: auto;
+    }
+  }
+}
+
+//  <div class="routeCategory"><p class="descricion"> {
+//      {
+//      routeCategoryDescription
+//    }
+//  }
+//  </p><p class="club"> {
+//      {
+//      routeClubShortName
+//    }
+//  }
+//  </p></div>
