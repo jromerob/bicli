@@ -26,9 +26,9 @@ export class PlansProvider {
 
   addPlan(plan: PlanModel, adminUID: string): Promise<void> {
     // Persist a document id
-    plan.id_plan = this.angularFirestore.createId();
+    plan.idPlan = this.angularFirestore.createId();
     let planObj = Object.assign({}, plan)
-    return this.plansCollection.doc(plan.id_plan).set(planObj)
+    return this.plansCollection.doc(plan.idPlan).set(planObj)
 
   }
 

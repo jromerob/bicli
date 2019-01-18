@@ -9,6 +9,7 @@ import { ClubsListSubcribedComponent } from './clubs-list-subcribed/clubs-list-s
 import { ClubsListComponent } from './clubs-list/clubs-list.component';
 import { ClubsDetailComponent } from './clubs-detail/clubs-detail.component';
 import { PlansListComponent } from './plans-list/plans-list.component';
+import { PlansDetailComponent } from './plans-detail/plans-detail';
 import { MeetingPointDetailComponent } from './meetingPoint-detail/meetingPoint-detail.component';
 import { AgmCoreModule } from '@agm/core';
 
@@ -22,6 +23,7 @@ import { AgmCoreModule } from '@agm/core';
     ClubsListComponent,
     ClubsDetailComponent,
     PlansListComponent,
+    PlansDetailComponent,
     MeetingPointDetailComponent
   ],
   imports: [
@@ -38,6 +40,7 @@ import { AgmCoreModule } from '@agm/core';
     ClubsListComponent,
     ClubsDetailComponent,
     PlansListComponent,
+    PlansDetailComponent,
     MeetingPointDetailComponent
   ]
 })

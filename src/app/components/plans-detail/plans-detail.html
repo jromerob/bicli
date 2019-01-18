@@ -1,0 +1,69 @@
+
+
+<ng-container *ngIf="club;else spinner">
+  <ion-item class="route-title">
+    <h1 text-wrap>Ruta planificada con el {{club.name}}  </h1>
+    <!-- <p>{{routeClubName}}</p>
+              <small>{{route.userId}}</small> -->
+  </ion-item>
+
+  <ion-item>
+  
+      <ion-icon name="time" item-left large></ion-icon>
+      <h2>Planificación:</h2>
+      <h3 text-wrap><ion-badge color='danger' item-end *ngIf=vencida>  <ion-icon name="warning"></ion-icon> VENCIDA</ion-badge> {{plan.time | date : 'dd-MM-yyyy'}} a las {{plan.time | date : 'hh:mm'}}</h3>
+      
+
+  </ion-item>
+
+  <ion-item (click)='gotoMeetingPointDetail()'>
+    <ion-icon name="exit" item-left large></ion-icon>
+    <h2>Punto de salida</h2>
+    <h3 text-wrap>{{club.meetingPoints[plan.idMeetingPoint].name}}</h3>
+    <p text-wrap>{{club.meetingPoints[plan.idMeetingPoint].address}}</p>
+    <p text-wrap>Salida a las {{plan.time | date : 'hh:mm'}}, cinco minutos de espera de cortesía</p>
+    <ion-icon name="arrow-forward" item-end ></ion-icon>
+  </ion-item>
+
+</ng-container>
+
+<ng-container *ngIf="route;else spinner">
+
+  <ion-item>
+    <div class="item-content">
+      <h1 text-wrap>{{route.name}}</h1>
+    </div>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-icon name="map" item-left large></ion-icon>
+    <h2>Recorrido</h2>
+    <p text-wrap>{{route.route}}</p>
+  </ion-item>
+
+  <ion-item class="distance">
+    <ion-icon name="speedometer" item-start large></ion-icon>
+    <h2>Distancia</h2>
+    <p>{{route.distance}} Km.</p>
+  </ion-item>
+
+  <ion-item class="level">
+    <ion-icon name="pulse" item-start large></ion-icon>
+    <h2>Nivel de esfuerzo</h2>
+    <p>{{route.level}}</p>
+  </ion-item>
+
+
+  <ion-item *ngIf="route.observations">
+    <ion-icon name="text" item-start large></ion-icon>
+    <h2>Observaciones</h2>
+    <p>{{route.observations}}</p>
+  </ion-item>
+
+</ng-container>
+
+<ng-template #spinner>
+  <ion-spinner></ion-spinner>
+</ng-template>

@@ -18,5 +18,5 @@
   <ion-fab bottom right>
     <button ion-fab color="primary" (click)="navToNewPlan()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-  <plans-list></plans-list>
+  <plans-list (planClick)='navToPlanDetail($event)'></plans-list>
 </ion-content>

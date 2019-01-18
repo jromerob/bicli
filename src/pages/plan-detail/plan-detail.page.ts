@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PlanModel } from '../../app/models/plan.model';
+import { ClubsProvider } from '../../app/providers/clubs.provider';
+import { ClubModel, RouteModel } from '../../app/models';
+import { PlansProvider } from '../../app/providers/plans.provider';
+import { RoutesProvider } from '../../app/providers/routes.provider';
 
 /**
  * Generated class for the PlansPage page.
@@ -13,23 +17,29 @@ import { PlanModel } from '../../app/models/plan.model';
   selector: 'page-plan-detail',
   templateUrl: 'plan-detail.page.html',
 })
-export class PlanDetailPage {
+export class PlanDetailPage implements OnInit {
+
 
   plan: PlanModel
   mode: string;
+  club:ClubModel;
+  route:RouteModel;
 
-  constructor(public navParams: NavParams, private navController: NavController) {
-    this.plan = this.navParams.get("route") as PlanModel;
-    if (this.plan) {
-      //si recibimos plan por paramtros estamos en edicion o en modo vista
-      this.mode = "view";
-      this.mode = this.navParams.get("mode")
-    } else {
-      //si no recibimos plan por paramtros estamos en nuevo por lo que creamos un nuevo objeto
-      this.mode = "add"
-      this.plan = new PlanModel();
-    }
+
+  constructor(public navParams: NavParams, private navController: NavController,
+     private clubsProvider:ClubsProvider,
+     private routeProvider:RoutesProvider) {
+    this.plan = this.navParams.get("plan") as PlanModel;
+    this.mode = this.navParams.get("mode")
+    if (this.mode==='add') this.plan = new PlanModel();
+    
   }
+
+
+  ngOnInit(): void {
+   
+  }
+
 
   navToBack() {
     this.navController.pop();

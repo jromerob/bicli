@@ -18,13 +18,15 @@ export class PlansPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  navToPlanDetail(Plan: any) {
-    this.navCtrl.push(PlanDetailPage, { plan: Plan, mode: "view" })
+  navToPlanDetail(plan: any) {
+    this.navCtrl.push(PlanDetailPage, { plan: plan, mode: "view" })
   }
+  
   navToNewPlan() {
     this.navCtrl.push(PlanDetailPage, { mode: "add" })
   }
-  navToPlanEdit() {
-    this.navCtrl.push(PlanDetailPage, { mode: "edit" })
+
+  navToEditPlan(plan:any) {
+    this.navCtrl.push(PlanDetailPage, { mode: "edit", plan:plan})
   }
 }
